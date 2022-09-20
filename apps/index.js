@@ -18,6 +18,13 @@ import {
 	clearNoteRes
 } from "./admin.js";
 import {
+	rule as broadcastRule,
+	preGroupBroadcast,
+	GroupBroadcast,
+	getGroupList,
+	broadcastHelp
+} from "./broadcast.js"
+import {
 	refer_Artifacts
 } from "./refer_Artifacts.js";
 import {
@@ -42,7 +49,11 @@ export {
 	refer_Artifacts,
 	material_chart,
 	primogems_expect,
-	pool_interval
+	pool_interval,
+	preGroupBroadcast,
+	GroupBroadcast,
+	getGroupList,
+	broadcastHelp
 };
 const _path = process.cwd();
 
@@ -56,7 +67,7 @@ let rule = {
 		describe: "体力模板设置",
 	},
 	help: {
-		reg: "^#?(便签)?(命令|帮助|菜单|help|说明|功能|指令|使用说明)$",
+		reg: "^#?(windoge)?(命令|帮助|菜单|help|说明|功能|指令|使用说明)$",
 		describe: "查看插件的功能",
 	},
 	pokeNote: {
@@ -89,7 +100,8 @@ let rule = {
 		describe: "角色未复刻间隔"
 	},
 	
-	...adminRule
+	...adminRule,
+	...broadcastRule
 };
 
 lodash.forEach(rule, (r) => {
