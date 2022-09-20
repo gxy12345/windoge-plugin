@@ -25,10 +25,6 @@ export const helpList = [{
 }, {
 	"group": "其他信息查詢",
 	"list": [{
-		"icon": 59,
-		"title": "#胡桃参考面板",
-		"desc": "查询各角色24词条参考面板"
-	}, {
 		"icon": 51,
 		"title": "#武器素材",
 		"desc": "武器素材一览"
@@ -42,6 +38,11 @@ export const helpList = [{
 		"icon": 50,
 		"title": "#周本素材",
 		"desc": "周本素材一览"
+	},
+	{
+		"icon": 59,
+		"title": "#胡桃参考面板",
+		"desc": "查询各角色24词条参考面板"
 	},
 	{
 		"icon": 80,
@@ -59,7 +60,7 @@ export const helpList = [{
 	"group": "管理命令，仅管理员可用",
 	"auth": "master",
 	"list": [{
-		"icon": 5,
+		"icon": 3,
 		"title": "windoge（强制）更新",
 		"desc": "更新windoge插件"
 	}, {

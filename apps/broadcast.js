@@ -3,7 +3,7 @@ import {
 } from "oicq";
 import moment from 'moment';
 
-//项目路径
+// 颜文字列表，用于随机插入消息中，减少群发重复消息导致风控概率
 const emoticonList = [
 	"(๑•̀ㅂ•́)و✧", "╰(*°▽°*)╯", "（＝。＝）", "ヾ(≧▽≦*)o", "(o゜▽゜)o", " (/≧▽≦)/", "o(^▽^)o", "(๑′ㅂ`๑)",
 	"( ＾∀＾）", "(≧∀≦)ゞ", "≡ω≡", "( =•ω•= )m", "ヽ(✿ﾟ▽ﾟ)ノ", "(p≧w≦q)", "o(〃'▽'〃)o", "╰(￣▽￣)╭"
@@ -157,7 +157,7 @@ export async function getGroupList(e) {
 	}
 	let msg = "群通知使用帮助"
 	msg += '\n【#群通知+群号】向指定群发送通知'
-    msg += '\n【#群通知all】t向所有群发送通知'
+    msg += '\n【#群通知all】向所有群发送通知'
     msg += '\n【#群列表】显示当前机器人加入的群列表'
 	e.reply (msg);
 	return true;

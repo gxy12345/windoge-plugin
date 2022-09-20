@@ -43,7 +43,7 @@ export const rule = {
 	},
 	setNoteRes: {
 		hashMark: true,
-		reg: "^#导入便签背景图[1-6]$",
+		reg: "^#导入便签背景图[1-7]$",
 		describe: "【#管理】使用下载的背景图资源"
 	},
 	clearNoteRes: {
@@ -84,7 +84,12 @@ const templatePath = {
 		source: 2
 	},
 	template6: {
-		resPath: `${resPath}BJT/xiaoyao-cvs-plugin2/resources/dailyNote/`,
+		resPath: `${resPath}BJT-Template/Template2/`,
+		dstPath: `${resPath}dailyNote/Template/`,
+		source: 2
+	},
+	template7: {
+		resPath: `${resPath}BJT-Template/Template3/`,
 		dstPath: `${resPath}dailyNote/Template/`,
 		source: 2
 	},
@@ -358,7 +363,7 @@ export async function updateMiaoPlugin(e) {
 		}
 		e.reply("windoge插件更新成功，尝试重新启动Yunzai以应用更新...");
 		timer && clearTimeout(timer);
-		redis.set("xiaoyao-lite:restart-msg", JSON.stringify({
+		redis.set("windoge:restart-msg", JSON.stringify({
 			msg: "重启成功，新版windoge插件已经生效",
 			qq: e.user_id
 		}), {
