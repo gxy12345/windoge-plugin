@@ -28,7 +28,7 @@ let sysCfgReg = `^#便签设置\s*(${lodash.keys(cfgMap).join("|")})?\s*(.*)$`;
 export const rule = {
 	updateMiaoPlugin: {
 		hashMark: true,
-		reg: "^#windoge(强制)?更新",
+		reg: "^#windoge(强制)?更新$",
 		describe: "【#管理】便签更新",
 	},
 	sysCfg: {
@@ -38,17 +38,17 @@ export const rule = {
 	},
 	updateNoteRes: {
 		hashMark: true,
-		reg: "#便签背景图(强制)?更新",
+		reg: "^#便签背景图(强制)?更新$",
 		describe: "【#管理】下载背景图资源"
 	},
 	setNoteRes: {
 		hashMark: true,
-		reg: "#导入便签背景图[123456]",
+		reg: "^#导入便签背景图[1-6]$",
 		describe: "【#管理】使用下载的背景图资源"
 	},
 	clearNoteRes: {
 		hashMark: true,
-		reg: "#清空便签背景图",
+		reg: "^#清空便签背景图$",
 		describe: "【#管理】清空背景图"
 	}
 };
@@ -56,6 +56,39 @@ export const rule = {
 
 const _path = process.cwd();
 const resPath = `${_path}/plugins/windoge-plugin/resources/`;
+
+const templatePath = {
+	template1: {
+		resPath: `${resPath}BJT/xiaoyao-cvs-plugin2/resources/dailyNote/`,
+		dstPath: `${resPath}dailyNote/`,
+		source: 1
+	},
+	template2: {
+		resPath: `${resPath}BJT/xiaoyao-cvs-plugin3/resources/dailyNote/`,
+		dstPath: `${resPath}dailyNote/`,
+		source: 1
+	},
+	template3: {
+		resPath: `${resPath}BJT/xiaoyao-cvs-plugin4/resources/dailyNote/`,
+		dstPath: `${resPath}dailyNote/`,
+		source: 1
+	},
+	template4: {
+		resPath: `${resPath}BJT/xiaoyao-cvs-plugin5/resources/dailyNote/`,
+		dstPath: `${resPath}dailyNote/`,
+		source: 1
+	},
+	template5: {
+		resPath: `${resPath}BJT-Template/Template/`,
+		dstPath: `${resPath}dailyNote/Template/`,
+		source: 2
+	},
+	template6: {
+		resPath: `${resPath}BJT/xiaoyao-cvs-plugin2/resources/dailyNote/`,
+		dstPath: `${resPath}dailyNote/Template/`,
+		source: 2
+	},
+}
 
 export async function sysCfg(e, {
 	render
@@ -215,7 +248,7 @@ export async function updateNoteRes(e) {
 				} else {
 					Bot.logger.mark("背景图库2 安装完成");
 					BJTDownloadStatus2 = true;
-					e.reply(`背景图资源1安装成功！可以使用 #导入便签背景图(56) 来导入背景图\n您后续也可以通过 #便签背景图更新 命令来更新图像`);
+					e.reply(`背景图资源2安装成功！可以使用 #导入便签背景图(56) 来导入背景图\n您后续也可以通过 #便签背景图更新 命令来更新图像`);
 				}
 			});
 		}
@@ -236,46 +269,21 @@ export async function setNoteRes(e) {
 		e.reply("未找到背景图资源,请先使用 #便签背景图更新 命令获取背景图")
 		return true
 	}
-
-	let templateIndex = 1;
-	let templateSource = `${resPath}BJT/xiaoyao-cvs-plugin2/resources/dailyNote/`;
-	let templateDest = `${resPath}dailyNote/`;
-	let templateIndexRes1 = [1,2,3,4];
-	let templateIndexRes2 = [5,6];
-
-	if (e.msg.indexOf("2") != -1) {
-		templateIndex = 2; //模板类型2
-		templateSource = `${resPath}BJT/xiaoyao-cvs-plugin3/resources/dailyNote/`;
-		templateDest = `${resPath}dailyNote/`;
-	}
-	if (e.msg.indexOf("3") != -1) {
-		templateIndex = 3; //模板类型3
-		templateSource = `${resPath}BJT/xiaoyao-cvs-plugin4/resources/dailyNote/`;
-		templateDest = `${resPath}dailyNote/`;
-	}
-	if (e.msg.indexOf("4") != -1) {
-		templateIndex = 4; //模板类型4
-		templateSource = `${resPath}BJT/xiaoyao-cvs-plugin5/resources/dailyNote/`;
-		templateDest = `${resPath}dailyNote/`;
-	}
-	if (e.msg.indexOf("5") != -1) {
-		templateIndex = 5; //模板类型5
-		templateSource = `${resPath}BJT-Template/Template/`;
-		templateDest = `${resPath}dailyNote/Template`;
-	}
-	if (e.msg.indexOf("6") != -1) {
-		templateIndex = 6; //模板类型6
-		templateSource = `${resPath}BJT-Template/Template2/`;
-		templateDest = `${resPath}dailyNote/Template`;
-	}
-	if (!resBJTStatus && templateIndexRes1.includes(templateIndex)) {
+	
+	let templateIndex = e.msg.replace("#导入便签背景图", "");
+	let templateKey = `template${templateIndex}`
+	if (!resBJTStatus && templatePath[templateKey].source == 1) {
 		e.reply("未找到对应的背景图资源包，请使用 #便签背景图更新 命令获取背景图");
 		return true;
 	}
-	if (!resBJT2Status && templateIndexRes2.includes(templateIndex)) {
+	if (!resBJT2Status && templatePath[templateKey].source == 2) {
 		e.reply("未找到对应的背景图资源包，请使用 #便签背景图更新 命令获取背景图");
 		return true;
 	}
+
+	let templateSource = templatePath[templateKey].resPath;
+	let templateDest = templatePath[templateKey].dstPath;
+
 	Bot.logger.mark(`选择背景图路径: ${templateSource}`);
 	Bot.logger.mark(`替换背景图路径: ${templateDest}`);
 

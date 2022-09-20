@@ -19,7 +19,7 @@ const path_ = `/plugins/windoge-plugin/resources/common/layout/`;
 export async function help(e, {
 	render
 }) {
-	if (!/便签/.test(e.msg) && !Cfg.get("sys.help", false)) {
+	if (!/windoge/.test(e.msg) && !Cfg.get("sys.help", false)) {
 		return false;
 	}
 	let custom = {},
@@ -96,6 +96,6 @@ export async function versionInfo(e, {
 
 export async function refer_Artifacts_Desc(e){
 	let msg = [
-	  segment.image (path),]
+	  segment.image (`${_path}/plugins/windoge-plugin/resources/help/refer_Artifacts_help.png`),]
 	e.reply(msg);
 }
