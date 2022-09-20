@@ -1,5 +1,5 @@
 # windoge-plugin
-自用Yunzai-bot插件，多为修改适配其他大佬的插件功能
+自用Yunzai-bot(V2/V3)插件，多为修改适配其他大佬的插件功能
 
 
 ### 安装方法
@@ -22,6 +22,7 @@ git clone https://github.com/gxy12345/windoge-plugin.git ./plugins/windoge-plugi
 
 
 ### 模块来源
+我只是大佬代码的搬运工，本项目中的部分代码来自于以下项目：
 * [xiaoyao-cvs-plugin](https://github.com/ctrlcvs/xiaoyao-cvs-plugin)
 * [howe-plugin](https://github.com/howe0116/howe-plugin)
 
