@@ -408,17 +408,19 @@ export async function Note_appoint(e) {
 		for (let [index, item] of urlType.entries()) {
 			let msg_pass = [];
 			let imgurl;
-			if (item.includes(".")) {
+			if (item.includes(".") && item.indexOf(".") != 0) {
 				imgurl = await segment.image(`file://${mbPath}background_image/${item}`);
-				// Bot.logger.mark(`图片路径:${mbPath}background_image/${item}`);
+				Bot.logger.debug(`图片路径:${mbPath}background_image/${item}`);
 				item = item.split(".")[0];
 			} else {
+				let bgFiles = fs.readdirSync(`${mbPath}/Template/${item}/icon/bg/`);
+				bgFiles = bgFiles.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item))
 				imgurl = await segment.image(
-					`file://${mbPath}Template/${item}/icon/bg/${fs.readdirSync(`${mbPath}/Template/${item}/icon/bg/`)[0]}`
+					`file://${mbPath}Template/${item}/icon/bg/${bgFiles[0]}`
 					
 				)
-				let logging_path = fs.readdirSync(`${mbPath}/Template/${item}/icon/bg/`)[0]
-				// Bot.logger.mark(`图片路径:file://${mbPath}Template/${item}/icon/bg/${logging_path}`);
+				let logging_path = bgFiles[0]
+				Bot.logger.debug(`图片路径:file://${mbPath}Template/${item}/icon/bg/${logging_path}`);
 			}
 			item = index+1 + "." + item
 			count++;
