@@ -413,13 +413,8 @@ export async function Note_appoint(e) {
 				Bot.logger.debug(`图片路径:${mbPath}background_image/${item}`);
 				item = item.split(".")[0];
 			} else {
-				let bgFiles = fs.readdirSync(`${mbPath}/Template/${item}/icon/bg/`, (err, list) => {
-					list = list.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item));
-					return list
-				});
-				Bot.logger.debug(`文件列表:${bgFiles}`)
+				let bgFiles = fs.readdirSync(`${mbPath}/Template/${item}/icon/bg/`);
 				bgFiles = bgFiles.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item))
-				Bot.logger.debug(`文件列表2:${bgFiles}`)
 				imgurl = await segment.image(
 					`file://${mbPath}Template/${item}/icon/bg/${bgFiles[0]}`
 					
