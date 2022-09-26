@@ -15,13 +15,13 @@
 
 <div class="info_box">
 	<div class="head-box type{{bgType}}">
-		<div class="label">#便签设置</div>
-		<div class="title">便签管理面板</div>
+		<div class="label">#windoge设置</div>
+		<div class="title">windoge插件管理面板</div>
 	</div>
 </div>
-<div class="cfg-box">
-  <div class="cfg-group">游戏图鉴卡片展示</div>
-  <ul class="cfg-ul">
+<!-- <div class="cfg-box"> -->
+  <!-- <div class="cfg-group">游戏图鉴卡片展示</div>
+  <ul class="cfg-ul"> -->
     <!-- <li class="cfg-li">
       <div class="cfg-line">
         图鉴匹配查询
@@ -38,13 +38,13 @@
 	  </div>
 	  <div class="cfg-desc">图鉴目录 为兼容之前用js版本插件用户可以用指令关闭功能</div>
 	</li> -->
-	<li class="cfg-li">
+	<!-- <li class="cfg-li">
 	  <div class="cfg-line">
 	    戳一戳卡片
 	    <span class="cfg-hint"> #便签设置戳一戳 + 开启/关闭</span>
 	    {{@poke}}
 	  </div>
-	</li>
+	</li> -->
 	
   <!--  <li class="cfg-li">
       <div class="cfg-line">
@@ -69,8 +69,8 @@
       <div class="cfg-desc">面板查询暂不支持查他人</div>
     </li> -->
 
-  </ul>
-</div>
+  <!-- </ul>
+</div> -->
 <!-- <div class="cfg-box">
 	<div class="cfg-group">角色资料与信息查询</div>
 	<ul class="cfg-ul">
@@ -89,7 +89,7 @@
 	</ul>
 </div> -->
 <div class="cfg-box">
-	<div class="cfg-group">系统设置</div>
+	<div class="cfg-group">便签设置</div>
 	<ul class="cfg-ul">
 		<!-- <li class="cfg-li">
       <div class="cfg-line">
@@ -111,18 +111,18 @@
 		<li class="cfg-li">
 			<div class="cfg-line">
 				便签主开关
-				<span class="cfg-hint">#便签设置体力 + 开启/关闭</span>
+				<span class="cfg-hint">#windoge设置便签 + 开启/关闭</span>
 				{{@Note}}
 			</div>
-			<div class="cfg-desc">开启后将使用图鉴版体力作为Yunzai的默认体力</div>
+			<div class="cfg-desc">开启后将支持使用 #便签 命令</div>
 		</li>
 		<li class="cfg-li">
 			<div class="cfg-line">
 				设置体力模板类型
-				<span class="cfg-hint">#便签设置模板 + (0-2)</span>
+				<span class="cfg-hint">#windoge设置模板 + (0-2)</span>
 				  <div class="cfg-status">{{@len}}</div>
 			</div>
-			<div class="cfg-desc">需开启图鉴版体力作为Yunzai的默认体力,当前模板支持0(随机)以及1-2</div>
+			<div class="cfg-desc">需开启便签主开关,当前模板支持0(随机)以及1-2</div>
 		</li>
 		<!-- <li class="cfg-li">
        <div class="cfg-line">

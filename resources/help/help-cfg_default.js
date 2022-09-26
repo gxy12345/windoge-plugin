@@ -57,6 +57,19 @@ export const helpList = [{
 
 	]
 }, {
+	"group": "国际服信息查询",
+	"list": [{
+		"icon": 11,
+		"title": "#国际服兑换码",
+		"desc": "查询目前可用的国际服兑换码"
+	},
+	{
+		"icon": 12,
+		"title": "#国际服羊毛",
+		"desc": "查询hoyolab可获得原石的活动"
+	}
+	]
+}, {
 	"group": "管理命令，仅管理员可用",
 	"auth": "master",
 	"list": [{

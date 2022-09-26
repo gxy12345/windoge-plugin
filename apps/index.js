@@ -32,7 +32,12 @@ import {
 	primogems_expect,
 	pool_interval
 } from "./materials.js";
-
+import {
+	checkEvent
+} from "./hoyolab_event.js";
+import {
+	OSCode
+} from "./os_code.js"
 
 export {
 	updateMiaoPlugin,
@@ -53,7 +58,9 @@ export {
 	preGroupBroadcast,
 	GroupBroadcast,
 	getGroupList,
-	broadcastHelp
+	broadcastHelp,
+	checkEvent,
+	OSCode
 };
 const _path = process.cwd();
 
@@ -98,6 +105,14 @@ let rule = {
 	pool_interval: {
 		reg: "^#*未复刻(角色|统计)*$",
 		describe: "角色未复刻间隔"
+	},
+	checkEvent: {
+		reg: "^#*国际服(白嫖|羊毛)$",
+		describe: "国际服hoyolab白嫖原石活动"
+	},
+	OSCode: {
+		reg: "^#*国际服(兑换码|激活码)$",
+		describe: "国际服当前可用兑换码"
 	},
 	
 	...adminRule,
