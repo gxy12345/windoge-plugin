@@ -3,9 +3,11 @@
 
 
 ### 安装方法
+1. yunzai根目录运行以下命令
 ```
 git clone https://github.com/gxy12345/windoge-plugin.git ./plugins/windoge-plugin/
 ```
+2. 使用`pnpm install` 或是 `npm install date-format`安装依赖
 
 
 ### 当前功能
@@ -18,8 +20,8 @@ git clone https://github.com/gxy12345/windoge-plugin.git ./plugins/windoge-plugi
 * `#原石预估` 下个版本可以获得的原石预估
 * `#未复刻` 各限定角色未复刻时间汇总图
 * `#群通知+群号` `#群通知all` `#群列表` `#群通知帮助` 群发通知
-* `#国际服羊毛` 获取hoyolab上可以白嫖原石活动的报名信息
-* `#国际服兑换码` 获取当前国际服可用的兑换码
+* `#国际服羊毛` 获取hoyolab上可以白嫖原石活动的报名信息（注意，本功能需要搭配科学上网使用）
+* `#国际服兑换码` 获取当前国际服可用的兑换码（注意，本功能需要搭配科学上网（港或日）使用）
 * 待更新...
 
 
