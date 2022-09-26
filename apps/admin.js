@@ -18,41 +18,6 @@ import Common from "../components/Common.js";
 
 const require = createRequire(
 	import.meta.url);
-let cfgMap = {
-	"体力": "sys.Note",
-	// "帮助": "sys.help",
-	"戳一戳":"note.poke",
-	"模板": "mb.len",
-};
-let sysCfgReg = `^#便签设置\s*(${lodash.keys(cfgMap).join("|")})?\s*(.*)$`;
-export const rule = {
-	updateMiaoPlugin: {
-		hashMark: true,
-		reg: "^#windoge(强制)?更新$",
-		describe: "【#管理】便签更新",
-	},
-	sysCfg: {
-		hashMark: true,
-		reg: sysCfgReg,
-		describe: "【#管理】系统设置"
-	},
-	updateNoteRes: {
-		hashMark: true,
-		reg: "^#便签背景图(强制)?更新$",
-		describe: "【#管理】下载背景图资源"
-	},
-	setNoteRes: {
-		hashMark: true,
-		reg: "^#导入便签背景图[1-7]$",
-		describe: "【#管理】使用下载的背景图资源"
-	},
-	clearNoteRes: {
-		hashMark: true,
-		reg: "^#清空便签背景图$",
-		describe: "【#管理】清空背景图"
-	}
-};
-
 
 const _path = process.cwd();
 const resPath = `${_path}/plugins/windoge-plugin/resources/`;
@@ -94,6 +59,42 @@ const templatePath = {
 		source: 2
 	},
 }
+let cfgMap = {
+	"便签": "sys.Note",
+	// "帮助": "sys.help",
+	// "戳一戳":"note.poke",
+	"模板": "mb.len",
+	"社区活动": "hoyolab.event",
+};
+let sysCfgReg = `^#windoge设置\s*(${lodash.keys(cfgMap).join("|")})?\s*(.*)$`;
+export const rule = {
+	updateMiaoPlugin: {
+		hashMark: true,
+		reg: "^#windoge(强制)?更新$",
+		describe: "【#管理】便签更新",
+	},
+	sysCfg: {
+		hashMark: true,
+		reg: sysCfgReg,
+		describe: "【#管理】系统设置"
+	},
+	updateNoteRes: {
+		hashMark: true,
+		reg: "^#便签背景图(强制)?更新$",
+		describe: "【#管理】下载背景图资源"
+	},
+	setNoteRes: {
+		hashMark: true,
+		reg: `^#导入便签背景图[1-${Object.keys(templatePath).length}]$`,
+		describe: "【#管理】使用下载的背景图资源"
+	},
+	clearNoteRes: {
+		hashMark: true,
+		reg: "^#清空便签背景图$",
+		describe: "【#管理】清空背景图"
+	}
+};
+
 
 export async function sysCfg(e, {
 	render
@@ -253,7 +254,7 @@ export async function updateNoteRes(e) {
 				} else {
 					Bot.logger.mark("背景图库2 安装完成");
 					BJTDownloadStatus2 = true;
-					e.reply(`背景图资源2安装成功！可以使用 #导入便签背景图(56) 来导入背景图\n您后续也可以通过 #便签背景图更新 命令来更新图像`);
+					e.reply(`背景图资源2安装成功！可以使用 #导入便签背景图(567) 来导入背景图\n您后续也可以通过 #便签背景图更新 命令来更新图像`);
 				}
 			});
 		}
