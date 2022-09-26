@@ -10,7 +10,7 @@ git clone https://github.com/gxy12345/windoge-plugin.git ./plugins/windoge-plugi
 
 ### 当前功能
 * `#便签` 与yunzai自带的体力区分，使用xiaoyao-cvs-plugin中的体力面板展示
-* `#便签设置` xiaoyao-cvs-plugin中的相应设置
+* `#windoge设置` xiaoyao-cvs-plugin中的相应设置
 * `#便签背景图(强制)更新` 更新背景图库
 * `#导入便签背景图+数字` `#清空便签背景图` 导入/清空第三方背景图模板
 * `#XX参考面板`  `#参考面板帮助` 来源howe插件，原作者不再维护，将继续维护
