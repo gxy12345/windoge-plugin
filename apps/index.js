@@ -103,7 +103,7 @@ let rule = {
 		describe: "参考面板说明",
 	},
 	pool_interval: {
-		reg: "^#*未复刻(角色|统计)*$",
+		reg: "^#*未复刻(角色|武器)*$",
 		describe: "角色未复刻间隔"
 	},
 	checkEvent: {

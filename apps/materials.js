@@ -19,7 +19,7 @@ export const rule = {
         describe: "原石预估" //【命令】功能说明
     },
     pool_interval: {
-        reg: "^#*未复刻(角色|统计)*$",  //匹配消息正则，命令正则
+        reg: "^#*未复刻(角色|武器)*$",  //匹配消息正则，命令正则
         priority: 50, //优先级，越小优先度越高
         describe: "角色未复刻间隔" //【命令】功能说明
     }
@@ -66,7 +66,12 @@ export async function primogems_expect (e) {
 }
 
 export async function pool_interval (e) {
-    let path = `${_path}/plugins/windoge-plugin/resources/materials/未复刻.png`;
+    let msg = e.msg.replace(/#|＃|未复刻|/g, "");
+    if (msg == "") {
+        e.reply("请回复 #未复刻角色 或 #未复刻武器 进行查询")
+        return true
+    }
+    let path = `${_path}/plugins/windoge-plugin/resources/materials/未复刻${msg}.png`;
     console.log (path);
     if (fs.existsSync (path)) {
         //最后回复消息
