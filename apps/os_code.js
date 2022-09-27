@@ -38,19 +38,16 @@ async function getCode() {
 export async function OSCode(e) {
     let codes = await getCode()
     if (codes.length == 0) {
-        e.reply("未获取到激活码")
+        e.reply("未获取到兑换码")
         return true
     }
-    if (codes.length > 1) {
-        let msgData = []
-        msgData.push("当前可用兑换码如下")
-        codes.forEach(val => {
-            msgData.push(val)
-        })
-        await utils.replyMake(e, msgData, 0)
-    } else {
-        e.reply(`当前可用兑换码: ${codes}`)
-    }
+    let msgData = []
+    msgData.push("当前可用兑换码如下")
+    codes.forEach(val => {
+        msgData.push(val)
+    })
+    msgData.push("兑换码兑换网站: https://genshin.hoyoverse.com/zh-tw/gift")
+    await utils.replyMake(e, msgData, 0)
     return true
 }
 

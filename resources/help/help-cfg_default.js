@@ -46,8 +46,8 @@ export const helpList = [{
 	},
 	{
 		"icon": 80,
-		"title": "#未复刻",
-		"desc": "未复刻限定角色查询"
+		"title": "#未复刻角色 #未复刻武器",
+		"desc": "未复刻限定角色/武器查询"
 	},
 	{
 		"icon": 5,
@@ -74,7 +74,7 @@ export const helpList = [{
 	"auth": "master",
 	"list": [{
 		"icon": 3,
-		"title": "windoge（强制）更新",
+		"title": "windoge(强制)更新",
 		"desc": "更新windoge插件"
 	}, {
 		"icon": 7,
@@ -87,11 +87,11 @@ export const helpList = [{
 	}, {
 		"icon": 9,
 		"title": "#清空便签背景图",
-		"desc": "清空便签背景图资源"
+		"desc": "清空当前使用的三方便签背景图"
 	}, {
 		"icon": 10,
-		"title": "#便签设置",
-		"desc": "修改便签相关设置内容"
+		"title": "#windoge设置",
+		"desc": "插件设置"
 	}, {
 		"icon": 94,
 		"title": "#群通知 #群通知帮助",
