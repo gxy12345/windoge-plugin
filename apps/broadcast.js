@@ -1,6 +1,7 @@
 import {
 	segment
 } from "oicq";
+import utils from "./utils.js";
 import moment from 'moment';
 
 // 颜文字列表，用于随机插入消息中，减少群发重复消息导致风控概率
@@ -98,7 +99,10 @@ export async function GroupBroadcast(e) {
 
 	if (is_broadcast[e.user_id]){
 		e.reply(`开始向所有群发送群消息`)
-		Bot.gl.forEach(function(group, groupId, gl) {
+		Bot.gl.forEach(async function(group, groupId, gl) {
+			await utils.sleepAsync(1000)
+			emotionIndex = Math.round(Math.random() * (emoticonList.length - 1))
+			boradcast_msg = `以下是来自主人的通知${emoticonList[emotionIndex]}\n${e.msg}`
 			Bot.pickGroup(Number(groupId))
 			.sendMsg(boradcast_msg)
 			.catch((err) => {
@@ -107,9 +111,9 @@ export async function GroupBroadcast(e) {
 			  cancel(e);
 			  return true;
 			});
-			cancel(e);
-			return true;
 		  })
+		  cancel(e);
+		  return true;
 	}
 	else {
 		e.reply(`开始发送群消息-${group_id[e.user_id]}`)
