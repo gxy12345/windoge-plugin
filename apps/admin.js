@@ -64,7 +64,8 @@ let cfgMap = {
 	// "帮助": "sys.help",
 	// "戳一戳":"note.poke",
 	"模板": "mb.len",
-	"社区活动": "hoyolab.event",
+	"更多活动": "hoyolab.more_event",
+	"兑换码": "os.code",
 };
 let sysCfgReg = `^#windoge设置\s*(${lodash.keys(cfgMap).join("|")})?\s*(.*)$`;
 export const rule = {
@@ -133,6 +134,8 @@ export async function sysCfg(e, {
 		Note: getStatus("sys.Note",false),
 		len:Cfg.get("mb.len", 0),
 		poke: getStatus("note.poke",false),
+		hoyolabMoreEvent: getStatus("hoyolab.more_event",false),
+		osCode: getStatus("os.code",false),
 		bg: await rodom(), //获取底图
 	}
 	//渲染图像

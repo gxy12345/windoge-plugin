@@ -11,7 +11,7 @@ export class windoge extends plugin {
 	}
     super({
       name: 'windoge-plugin',
-      desc: '图鉴插件',
+      desc: 'windoge插件',
       event: 'message',
       priority: 50,
       rule: [rule]

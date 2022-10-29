@@ -38,6 +38,9 @@ import {
 import {
 	OSCode
 } from "./os_code.js"
+import {
+	 gacha_expect
+} from "./gacha_expect.js";
 
 export {
 	updateMiaoPlugin,
@@ -60,7 +63,8 @@ export {
 	getGroupList,
 	broadcastHelp,
 	checkEvent,
-	OSCode
+	OSCode,
+	gacha_expect,
 };
 const _path = process.cwd();
 
@@ -107,12 +111,17 @@ let rule = {
 		describe: "角色未复刻间隔"
 	},
 	checkEvent: {
-		reg: "^#*国际服(白嫖|羊毛)$",
+		reg: "^#*国际服(白嫖|羊毛|活动)$",
 		describe: "国际服hoyolab白嫖原石活动"
 	},
 	OSCode: {
-		reg: "^#*国际服(兑换码|激活码)$",
-		describe: "国际服当前可用兑换码"
+		reg: "^#*(国际服|国服)?兑换码$",
+		describe: "国际服当前可用兑换码",
+		priority: 100,
+	},
+	gacha_expect: {
+        reg: "^#(抽卡|[0-6]命)+期望+$",
+        describe: "抽卡期望表"
 	},
 	
 	...adminRule,
