@@ -18,7 +18,7 @@ const reqHeaders = {
     "x-rpc-show-translated": true,
 }
 
-async function getEvent() {
+async function getEvent(moreEvent=false) {
     const redisKey = "windoge:hoyolab:event"
     let cacheData = await redis.get(redisKey)
     if (cacheData) {
@@ -29,30 +29,28 @@ async function getEvent() {
         timeout: 10000,
         method: 'get',
     }
-    let eventData = {
-        hoyoquiz: null,
-        twitch: null
-    }
+    let eventList = []
+
     let response = {}
     try {
         response = await fetch(HoyolabEventListApiUrl, param)
     } catch (error) {
         Bot.logger.error(error.toString())
-        return eventData
+        return eventList
     }
     if (!response.ok) {
         Bot.logger.error(`Hoyolab event接口请求失败] ${response.status} ${response.statusText}`)
-        return eventData
+        return eventList
     }
     const res = await response.json()
     if (!res) {
         Bot.logger.mark('Hoyolab Event接口没有返回')
-        return eventData
+        return eventList
     }
 
     if (res.retcode !== 0) {
         Bot.logger.mark(`Hoyolab event接口请求错误, 参数:${JSON.stringify(param)}`)
-        return eventData
+        return eventList``
     }
 
     let now = Date.now() / 1000
@@ -61,19 +59,41 @@ async function getEvent() {
         // hoyo quiz的结束时间约等于答题活动结束
         if (val.name.includes('HoYo Quiz') && val.name.includes('场次公开') && val.end >= now) {
             Bot.logger.debug(`获取到满足条件的活动,${val.name}, ${val.desc}`)
-            eventData.hoyoquiz = val
+            eventList.push(
+                {
+                    event_detail: val,
+                    event_type: 'HoYo Quiz'
+                }
+            )
         }
         
         // 直播活动报名结束时间，一般为开始时间后7天
         if (val.name.includes('Twitch创作者成长营') && now - val.start < 3600 * 24 * 7) {
             Bot.logger.debug(`获取到满足条件的活动,${val.name}, ${val.desc}`)
-            eventData.twitch = val
+            eventList.push(
+                {
+                    event_detail: val,
+                    event_type: 'Twitch创作者成长营'
+                }
+            )
+        }
+
+        // 网页活动，因为奖励包含抽奖，且不一定准确，开启开关后再显示
+        if (moreEvent && val.name.includes('网页活动') && /原石|游戏内道具/.test(val.desc) && val.end >= now) {
+            Bot.logger.debug(`获取到满足条件的活动,${val.name}, ${val.desc}`)
+            eventList.push(
+                {
+                    event_detail: val,
+                    event_type: '网页活动'
+                }
+            )
         }
     });
-    redis.set(redisKey, JSON.stringify(eventData), { EX: 1800 });
-    return eventData
+    redis.set(redisKey, JSON.stringify(eventList), { EX: 1800 });
+    return eventList
 }
 
+// 咕咕
 export async function eventPushJob(e) {
     if (!Cfg.get("hoyolab.event")) {
         return false;
@@ -86,17 +106,19 @@ export async function eventPushJob(e) {
 }
 
 export async function checkEvent(e) {
-    // if (!Cfg.get("hoyolab.event")) {
-    //     return false;
-    // }
-
-    let eventData = await getEvent()
-    let needMakeMsg = eventData.hoyoquiz !== null && eventData.twitch !== null
+    let eventList = []
+    if (Cfg.get("hoyolab.more_event")) {
+        Bot.logger.debug(`查询更多活动`)
+        eventList = await getEvent(true)
+    } else {
+        eventList = await getEvent(false)
+    }
+    let needMakeMsg = eventList.length > 1
 
     let msg = ""
     let msgData = []
 
-    if (eventData.hoyoquiz === null && eventData.twitch === null){
+    if (eventList.length == 0){
         msg = "暂时未查询到hoyolab活动"
     } else {
         let descContent = ""
@@ -105,27 +127,17 @@ export async function checkEvent(e) {
             msgData.push(msg)
             msg = ''
         }
-        if (eventData.hoyoquiz !== null) {
-            msg += `[Hoyo Quiz]${eventData.hoyoquiz.name}\n`
-            descContent = `活动描述:${eventData.hoyoquiz.desc}`
+        for (let event of eventList) {
+            msg += `[${event.event_type}]${event.event_detail.name}\n`
+            descContent = `活动描述:${event.event_detail.desc}`
             if (descContent.length > 75) {
                 descContent = `${descContent.substring(0, 72)}...`
             }
             msg += `${descContent}\n`
-            msg += `${HoyolabWebHost}${eventData.hoyoquiz.web_path}\n`
-            if (needMakeMsg) {
-                msgData.push(msg)
-                msg = ''
+            msg += `${HoyolabWebHost}${event.event_detail.web_path}`
+            if (event.event_type === 'Twitch创作者成长营') {
+                msg += "\nTwitch创作者成长营参加指南: https://docs.qq.com/doc/DQ3hqQXp4V21idUZJ"
             }
-        }
-        if (eventData.twitch !== null) {
-            msg += `[Twitch创作者成长营]${eventData.twitch.name}\n`
-            descContent = `活动描述:${eventData.twitch.desc}`
-            if (descContent.length > 75) {
-                descContent = `${descContent.substring(0, 72)}...`
-            }
-            msg += `${descContent}\n`
-            msg += `${HoyolabWebHost}${eventData.twitch.web_path}\n`
             if (needMakeMsg) {
                 msgData.push(msg)
                 msg = ''

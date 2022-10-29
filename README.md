@@ -7,7 +7,7 @@
 ```
 git clone https://github.com/gxy12345/windoge-plugin.git ./plugins/windoge-plugin/
 ```
-2. 使用`pnpm install` 或是 `npm install date-format`安装依赖
+2. 使用`pnpm install --filter=windoge-plugin` 或是 `npm install date-format`安装依赖
 
 
 ### 当前功能
@@ -22,6 +22,7 @@ git clone https://github.com/gxy12345/windoge-plugin.git ./plugins/windoge-plugi
 * `#群通知+群号` `#群通知all` `#群列表` `#群通知帮助` 群发通知
 * `#国际服羊毛` 获取hoyolab上可以白嫖原石活动的报名信息（注意，本功能需要搭配科学上网使用）
 * `#国际服兑换码` 获取当前国际服可用的兑换码（注意，本功能需要搭配科学上网（港或日）使用）
+* `#抽卡期望` `#2命期望` 查询指定命座的抽数期望表
 * 待更新...
 
 

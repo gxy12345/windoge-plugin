@@ -54,7 +54,11 @@ export const helpList = [{
 		"title": "#原石预估",
 		"desc": "下版本可获得原石预估"
 	},
-
+	{
+		"icon": 8,
+		"title": "#抽卡期望 #6命期望",
+		"desc": "插卡期望表"
+	},
 	]
 }, {
 	"group": "国际服信息查询",
