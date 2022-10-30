@@ -385,6 +385,9 @@ export async function pokeNote(e){
 
 
 export async function Note_appoint(e) {
+	if (!Cfg.get("sys.Note")) {
+		return false;
+	}
 	let mbPath = `${_path}/plugins/windoge-plugin/resources/dailyNote/`;
 	let msg = e.msg.replace(/#|井|便签|模板|设置/g, "");
 
