@@ -100,11 +100,11 @@ export async function GroupBroadcast(e) {
 	if (is_broadcast[e.user_id]){
 		e.reply(`开始向所有群发送群消息`)
 		for (let group of Bot.gl) {
-			await utils.sleepAsync(1000)
+			await utils.sleepAsync(2000)
 			emotionIndex = Math.round(Math.random() * (emoticonList.length - 1))
 			boradcast_msg = `以下是来自主人的通知${emoticonList[emotionIndex]}\n${e.msg}`
-			Bot.logger.mark(`向 ${group.group_id} 发送消息: ${boradcast_msg}`);
-			Bot.pickGroup(Number(group.group_id))
+			Bot.logger.mark(`向 ${group[1].group_id} 发送消息: ${boradcast_msg}`);
+			Bot.pickGroup(Number(group[1].group_id))
 			.sendMsg(boradcast_msg)
 			.catch((err) => {
 			  Bot.logger.mark(err);
