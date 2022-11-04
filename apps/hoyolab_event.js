@@ -68,12 +68,19 @@ async function getEvent(moreEvent=false) {
         }
         
         // 直播活动报名结束时间，一般为开始时间后7天
-        if (val.name.includes('Twitch创作者成长营') && now - val.start < 3600 * 24 * 7) {
+        if (val.name.includes('Twitch创作者成长营') && val.end >= now) {
             Bot.logger.debug(`获取到满足条件的活动,${val.name}, ${val.desc}`)
+            let sub_type
+            if (now - val.start < 3600 * 24 * 7) {
+                sub_type = 'Twitch创作者成长营-报名中'
+            } else {
+                sub_type = 'Twitch创作者成长营-已开始'
+            }
+
             eventList.push(
                 {
                     event_detail: val,
-                    event_type: 'Twitch创作者成长营'
+                    event_type: sub_type
                 }
             )
         }
@@ -122,10 +129,13 @@ export async function checkEvent(e) {
         msg = "暂时未查询到hoyolab活动"
     } else {
         let descContent = ""
-        msg = "当前hoyolab可获得原石活动如下:\n"
+        msg = "当前hoyolab可获得原石活动如下:"
         if (needMakeMsg) {
             msgData.push(msg)
             msg = ''
+        }
+        else {
+            msg += "\n"
         }
         for (let event of eventList) {
             msg += `[${event.event_type}]${event.event_detail.name}\n`
@@ -135,7 +145,7 @@ export async function checkEvent(e) {
             }
             msg += `${descContent}\n`
             msg += `${HoyolabWebHost}${event.event_detail.web_path}`
-            if (event.event_type === 'Twitch创作者成长营') {
+            if (event.event_type.includes('Twitch创作者成长营')) {
                 msg += "\nTwitch创作者成长营参加指南: https://docs.qq.com/doc/DQ3hqQXp4V21idUZJ"
             }
             if (needMakeMsg) {
