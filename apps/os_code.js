@@ -35,7 +35,7 @@ async function getCode() {
             codeList.push(code)
         });
     }
-    redis.set(redisKey, JSON.stringify(codeList), { EX: 600 });
+    redis.set(redisKey, JSON.stringify(codeList), { EX: 300 });
     return codeList
 }
 

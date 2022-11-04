@@ -96,7 +96,7 @@ async function getEvent(moreEvent=false) {
             )
         }
     });
-    redis.set(redisKey, JSON.stringify(eventList), { EX: 1800 });
+    redis.set(redisKey, JSON.stringify(eventList), { EX: 600 });
     return eventList
 }
 
