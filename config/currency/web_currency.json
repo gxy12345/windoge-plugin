@@ -1,0 +1,74 @@
+{
+    "USD": {
+        "price": 99.99,
+        "name": "美元"
+    },
+    "HKD": {
+        "price": 788,
+        "name": "港元"
+    },
+    "EUR": {
+        "name": "欧元",
+        "price": 99.99
+    },
+    "IDR": {
+        "name": "印尼卢比",
+        "price": 1599000
+    },
+    "INR": {
+        "name": "印度卢比",
+        "price": 8900
+    },
+    "RUB": {
+        "name": "卢布",
+        "price": 9490
+    },
+    "JPY": {
+        "name": "日元",
+        "price": 12000
+    },
+    "SGD": {
+        "name": "新加坡元",
+        "price": 148.98
+    },
+    "CAD": {
+        "name": "加元",
+        "price": 139.99
+    },
+    "KRW": {
+        "name": "韩元",
+        "price": 119000
+    },
+    "CNY": {
+        "name": "人民币元",
+        "price": 648
+    },
+    "THB": {
+        "name": "泰铢",
+        "price": 3700
+    },
+    "TWD": {
+        "name": "新台币元",
+        "price": 3290
+    },
+    "MXN": {
+        "name": "墨西哥比索",
+        "price": 2499
+    },
+    "VND": {
+        "name": "越南盾",
+        "price": 2199000
+    },
+    "MYR": {
+        "name": "马来林吉特",
+        "price": 399.9
+    },
+    "GBP": {
+        "name": "英镑",
+        "price": 89.99
+    },
+    "PHP": {
+        "name": "菲律宾比索",
+        "price": 4990
+    }
+}

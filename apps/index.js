@@ -41,6 +41,7 @@ import {
 import {
 	 gacha_expect
 } from "./gacha_expect.js";
+import { CurrencyRate } from "./currency_rate.js";
 
 export {
 	updateMiaoPlugin,
@@ -65,6 +66,7 @@ export {
 	checkEvent,
 	OSCode,
 	gacha_expect,
+	CurrencyRate,
 };
 const _path = process.cwd();
 
@@ -122,6 +124,10 @@ let rule = {
 	gacha_expect: {
         reg: "^#(抽卡|[0-6]命)+期望+$",
         describe: "抽卡期望表"
+	},
+	CurrencyRate: {
+        reg: "^#(Google|google|谷歌|安卓)?充值(汇率|价格)(all)*$",
+        describe: "充值汇率"
 	},
 	
 	...adminRule,
