@@ -1,6 +1,7 @@
 import lodash from "lodash";
 import fs from "fs";
 import path from "path"
+import bagpipe from "bagpipe"
 const _path = process.cwd()
 
 let Data = {
@@ -182,6 +183,8 @@ export function copyFolder(copiedPath, resultPath, direct) {
   if (fs.existsSync(copiedPath)) {
     createDir(resultPath)
     const files = fs.readdirSync(copiedPath, { withFileTypes: true });
+
+    let copy_pipe = new bagpipe(10);
     for (let i = 0; i < files.length; i++) {
       const cf = files[i]
       const ccp = path.join(copiedPath, cf.name)
@@ -189,7 +192,17 @@ export function copyFolder(copiedPath, resultPath, direct) {
       if (cf.isFile()) {
         const readStream = fs.createReadStream(ccp)
         const writeStream = fs.createWriteStream(crp)
-        readStream.pipe(writeStream)
+        copy_pipe.push(
+          function (ws) {
+            return readStream.pipe(ws)
+          },
+           writeStream, 
+           function (err, res){
+            if (err) {
+              Bot.logger.error(`复制失败\n${err.stack}`);
+            }
+          }
+        )
       } else {
         try {
           fs.accessSync(path.join(crp, '..'), fs.constants.W_OK)
