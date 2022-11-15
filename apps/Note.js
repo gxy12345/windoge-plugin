@@ -257,6 +257,7 @@ export async function Note(e, {
 			})
 		}
 		img_path = `./plugins/windoge-plugin/resources/dailyNote/Template/${urlType}${path_img[mb]}`;
+		Bot.logger.debug(`体力背景图路径:${img_path}`);
 	}
 	var image = fs.readdirSync(img_path);
 	var list_img = [];
@@ -267,6 +268,7 @@ export async function Note(e, {
 		list_img.push(val)
 	}
 	var imgs = list_img.length == 1 ? list_img[0] : list_img[lodash.random(0, list_img.length - 1)];
+	urlType = urlType.replace(/\s/g, encodeURIComponent(' '));
 	return await Common.render(`dailyNote/${path_url[mb]}`, {
 		save_id: uid,
 		uid: uid,

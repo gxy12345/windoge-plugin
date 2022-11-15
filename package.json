@@ -9,7 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "date-format": "^4.0.13"
+    "date-format": "^4.0.13",
+    "bagpipe": "^0.3.5"
   },
   "devDependencies": {},
   "keywords": [
