@@ -66,6 +66,7 @@ let cfgMap = {
 	"模板": "mb.len",
 	"更多活动": "hoyolab.more_event",
 	"兑换码": "os.code",
+	"汇率key": "os.currency_key",
 };
 let sysCfgReg = `^#windoge设置\s*(${lodash.keys(cfgMap).join("|")})?\s*(.*)$`;
 export const rule = {
@@ -119,8 +120,10 @@ export async function sysCfg(e, {
 
 		if (cfgKey === "sys.scale") {
 			val = Math.min(200, Math.max(50, val * 1 || 100));
-		}else if(cfgKey === "mb.len"){
-			val= Math.min(2,Math.max(val,0));
+		} else if(cfgKey === "mb.len"){
+			val = Math.min(2,Math.max(val,0));
+		} else if(cfgKey === "os.currency_key"){
+			val = val;
 		} else {
 			val = !/关闭/.test(val);
 		}
@@ -136,6 +139,7 @@ export async function sysCfg(e, {
 		poke: getStatus("note.poke",false),
 		hoyolabMoreEvent: getStatus("hoyolab.more_event",false),
 		osCode: getStatus("os.code",false),
+		CurrencyAPIKey: getStatus("os.currency_key", false),
 		bg: await rodom(), //获取底图
 	}
 	//渲染图像
@@ -167,9 +171,18 @@ const checkAuth = async function(e) {
 }
 const getStatus = function(rote, def = true) {
 	if (Cfg.get(rote, def)) {
-		return `<div class="cfg-status" >已开启</div>`;
+		if (rote === "os.currency_key") {
+			return `<div class="cfg-status" >已设置</div>`;
+		} else {
+			return `<div class="cfg-status" >已开启</div>`;
+		}
 	} else {
-		return `<div class="cfg-status status-off">已关闭</div>`;
+		if (rote === "os.currency_key") {
+			return `<div class="cfg-status status-off">未设置</div>`;
+		} else {
+			return `<div class="cfg-status status-off">未开启</div>`;
+		}
+
 	}
 
 }

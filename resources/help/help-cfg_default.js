@@ -71,6 +71,11 @@ export const helpList = [{
 		"icon": 12,
 		"title": "#国际服羊毛",
 		"desc": "查询hoyolab可获得原石的活动"
+	},
+	{
+		"icon": 23,
+		"title": "#充值价格 #Google充值价格",
+		"desc": "查询不同地区充值648所需的价格"
 	}
 	]
 }, {

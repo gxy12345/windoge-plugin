@@ -1,0 +1,80 @@
+{{extend elemLayout}}
+
+{{block 'css'}}
+<link rel="stylesheet" type="text/css" href="{{_res_path}}/currency/index.css"/>
+{{/block}}
+
+{{block 'main'}}
+<div class="hydro-bg log-cont">
+  <div class="cont">
+    {{if platform === 'Google' }}
+    <div class="cont-title current-version">#Google充值价格 说明</div>
+    {{else}}
+    <div class="cont-title current-version">#充值价格 说明</div>
+    {{/if}}
+
+    <div class="cont-body">
+      <ul class="log-ul">
+        <li>
+          <p>以下为
+            {{if platform === 'Google' }}
+            <span class="strong">Google商店</span>
+            {{else}}
+            <span class="strong">官方网页</span>
+            {{/if}}
+            充值途径支持的各种货币的648价格，汇率更新存在一定延迟，仅供参考</p>
+          </ul>
+        </li>
+      </ul>
+      <ul class="log-ul">
+        <li>
+          <p>汇率计算结果按照充值价格从低到高排列，默认展示最低的8个地区</p>
+          <p>使用
+            {{if platform === 'Google' }}
+            <span class="cmd">#Google充值价格all</span>
+            {{else}}
+            <span class="cmd">#充值价格all</span>
+            {{/if}}
+             可以查询完整的充值价格列表</p>
+          </ul>
+        </li>
+      </ul>
+      <ul class="log-ul">
+        <li>
+          <p>跨区充值存在一定风险，请自行评估后充值</p>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="hydro-bg log-cont">
+  <div class="cont">
+    <div class="cont-title current-version">各货币648价格表</div>
+    <div class="cont-body">
+      <div class="cont-table">
+        <div class="tr">
+          <div class="th-idx">#</div>
+          <div class="th">货币</div>
+          <div class="th">648价格</div>
+          <div class="th">折合RMB</div>
+          <div class="th">相对折扣</div>
+        </div>
+        {{each top_price_list price idx}}
+        <div class="tr">
+          <div class="thead">{{idx+1}}</div>
+          <div class="thead">
+            <span class="currency-key">{{price.currency}}</span>
+            <span class="currency-name">{{price.currency_name}}</span>
+          </div>
+          <div class="thead">{{price.original_price}}</div>
+          <div class="thead">{{price.rmb_price}}</div>
+          <div class="thead">{{price.discount}}</div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+{{/block}}
