@@ -190,7 +190,7 @@ export function copyFolder(copiedPath, resultPath, direct) {
       if (cf.isFile()) {
         const readStream = fs.createReadStream(ccp)
         const writeStream = fs.createWriteStream(crp)
-        readStream.pipe(ws)
+        readStream.pipe(writeStream)
       } else {
         try {
           fs.accessSync(path.join(crp, '..'), fs.constants.W_OK)
