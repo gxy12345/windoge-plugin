@@ -42,6 +42,7 @@ import {
 	 gacha_expect
 } from "./gacha_expect.js";
 import { CurrencyRate } from "./currency_rate.js";
+import { AbyssStrategy } from "./abyss_strategy.js";
 
 export {
 	updateMiaoPlugin,
@@ -67,6 +68,7 @@ export {
 	OSCode,
 	gacha_expect,
 	CurrencyRate,
+	AbyssStrategy,
 };
 const _path = process.cwd();
 
@@ -128,6 +130,12 @@ let rule = {
 	CurrencyRate: {
         reg: "^#(Google|google|谷歌|安卓)?充值(汇率|价格)(all)*$",
         describe: "充值汇率"
+	},
+	AbyssStrategy: {
+		reg: "^#?(更新)?([1-9]\.[0-9])深渊攻略$",
+		// reg: "^#debug入口$",
+        describe: "深渊攻略",
+		priority: 30
 	},
 	
 	...adminRule,

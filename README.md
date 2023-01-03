@@ -24,6 +24,7 @@ git clone https://github.com/gxy12345/windoge-plugin.git ./plugins/windoge-plugi
 * `#国际服兑换码` 获取当前国际服可用的兑换码（注意，本功能需要搭配科学上网（港或日）使用）
 * `#抽卡期望` `#2命期望` 查询指定命座的抽数期望表
 * `#充值价格` `#充值汇率` `#Google充值汇率` 查询国际服不同货币充值价格最低的地区。需要自行申请API Key，[申请地址](https://www.exchangerate-api.com/)
+* `#3.3深渊攻略` `#更新3.3深渊攻略` 从米游社观测枢获取深渊攻略图并发送
 * 待更新...
 
 
