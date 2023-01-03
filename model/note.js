@@ -23,7 +23,7 @@ export default class note {
 		}
 		this.Cfg = `./plugins/${plugin}/config/`
 		this.role_user = Data.readJSON(`${_path}/plugins/windoge-plugin/resources/dailyNote/json/`, "dispatch_time");
-		gsCfg.cpCfg("config", "note")
+		// gsCfg.cpCfg("config", "note")
 		this.tempData = Data.readJSON(`./plugins/windoge-plugin/data/NoteTemp`, "tempData")
 		// this.cfg = gsCfg.getfileYaml(`./plugins/windoge-plugin/config/`, "config");
 	}
