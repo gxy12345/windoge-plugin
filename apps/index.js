@@ -132,8 +132,7 @@ let rule = {
         describe: "充值汇率"
 	},
 	AbyssStrategy: {
-		reg: "^#?(更新)?([1-9]\.[0-9])深渊攻略$",
-		// reg: "^#debug入口$",
+		reg: "^#?(更新)?([1-9]\.[0-9])深渊攻略[1-3]?$",
         describe: "深渊攻略",
 		priority: 30
 	},
