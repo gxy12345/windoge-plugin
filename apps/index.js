@@ -74,7 +74,7 @@ const _path = process.cwd();
 
 let rule = {
 	Note: {
-		reg: "^#*(便笺|便签|派遣)$",
+		reg: "^#*(多|全|全部)*(便笺|便签|派遣)$",
 		describe: "体力",
 	},
 	Note_appoint: {
