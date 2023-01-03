@@ -67,6 +67,9 @@ let cfgMap = {
 	"更多活动": "hoyolab.more_event",
 	"兑换码": "os.code",
 	"汇率key": "os.currency_key",
+	"深渊攻略转发": "abyss_strategy.forward",
+	"深渊攻略来源": "abyss_strategy.default",
+
 };
 let sysCfgReg = `^#windoge设置\s*(${lodash.keys(cfgMap).join("|")})?\s*(.*)$`;
 export const rule = {
@@ -124,7 +127,9 @@ export async function sysCfg(e, {
 			val = Math.min(2,Math.max(val,0));
 		} else if(cfgKey === "os.currency_key"){
 			val = val;
-		} else {
+		} else if(cfgKey === "abyss_strategy.default"){
+			val = Math.min(3, Math.max(val, 1));
+		}  else {
 			val = !/关闭/.test(val);
 		}
 		if (cfgKey) {
@@ -140,6 +145,8 @@ export async function sysCfg(e, {
 		hoyolabMoreEvent: getStatus("hoyolab.more_event",false),
 		osCode: getStatus("os.code",false),
 		CurrencyAPIKey: getStatus("os.currency_key", false),
+		AbyssForward: getStatus("abyss_strategy.forward", false),
+		AbyssDefault: Cfg.get("abyss_strategy.default", 1),
 		bg: await rodom(), //获取底图
 	}
 	//渲染图像

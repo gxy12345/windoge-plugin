@@ -1,13 +1,25 @@
 import fs from "fs";
+import path from "path";
 import fetch from "node-fetch";
 import common from '../../../lib/common/common.js'
 import { segment } from "oicq";
+import utils from "./utils.js";
+import { Cfg } from "../components/index.js";
 
 const _path = process.cwd();
 const abyss_strategy_path = `${_path}/data/AbyssStrategy`
 
 const collection_url = "https://bbs-api.mihoyo.com/post/wapi/getPostFullInCollection?&gids=2&order_type=2&collection_id="
-const collection_id = 347388
+const collection_id = [
+    // 原神观测枢
+    347388,
+    // 李沐瑟
+    980743,
+    // 大数据库里
+    1380672,
+
+]
+const source = ['原神观测枢', '李沐瑟', '大数据库里']
 
 const oss = '?x-oss-process=image//resize,s_1200/quality,q_90/auto-orient,0/interlace,1/format,jpg'
 
@@ -20,42 +32,65 @@ async function getData (url) {
     return res
   }
 
-export async function AbyssStrategy(e) {
-    if (!fs.existsSync(abyss_strategy_path)) {
-        fs.mkdirSync(abyss_strategy_path)
+function mkdirsSync(dirname) {
+if (fs.existsSync(dirname)) {
+    return true;
+} else {
+    if (mkdirsSync(path.dirname(dirname))) {
+    fs.mkdirSync(dirname);
+    return true;
     }
-    let match = /^#?(更新)?(\d\.\d)深渊攻略$/.exec(e.msg)
+}
+}
+
+export async function AbyssStrategy(e) {
+    // if (!fs.existsSync(abyss_strategy_path)) {
+    //     fs.mkdirSync(abyss_strategy_path)
+    // }
+    let match = /^#?(更新)?(\d\.\d)深渊攻略([1-3])?$/.exec(e.msg)
     let isUpdate = !!match[1]
     let versionName = match[2]
-    let versionPath = `${abyss_strategy_path}/${versionName}`
+    let default_group = Number(Cfg.get("abyss_strategy.default", 1))
+    let group = match[3] ? match[3] : default_group
+    let source_dir = source[group - 1]
+
+    let versionPath = `${abyss_strategy_path}/${versionName}/${source_dir}`
     if (!fs.existsSync(versionPath)) {
-        fs.mkdirSync(versionPath)
+        mkdirsSync(versionPath)
     }
 
     let strategyPics = fs.readdirSync(versionPath)
-    Bot.logger.debug(`攻略文件：${strategyPics}`)
     if (strategyPics.length > 0  && !isUpdate) {
         Bot.logger.debug(`攻略文件：${strategyPics}`)
         let msgs = []
         for (let img_name of strategyPics) {
             msgs.push(segment.image(`file://${versionPath}/${img_name}`))
         }
-        e.reply(msgs)
+
+        if (Cfg.get("abyss_strategy.forward", false)) {
+            await utils.replyMake(e, msgs, 0)
+        } else {
+            e.reply(msgs)
+        }
         return true
     }
-    if (await getStrategyImg(e, versionName, versionPath)) {
+    if (await getStrategyImg(e, versionName, group, versionPath)) {
         strategyPics = fs.readdirSync(versionPath)
         let msgs = []
         for (let img_name of strategyPics) {
             msgs.push(segment.image(`file://${versionPath}/${img_name}`))
         }
-        e.reply(msgs)
+        if (Cfg.get("abyss_strategy.forward", false)) {
+            await utils.replyMake(e, msgs, 0)
+        } else {
+            e.reply(msgs)
+        }
         return true
     }
 }
 
-async function getStrategyImg(e, versionName, versionPath) {
-    let strategyUrl = `${collection_url}${collection_id}`
+async function getStrategyImg(e, versionName, source_group, versionPath) {
+    let strategyUrl = `${collection_url}${collection_id[source_group - 1]}`
     let res = await getData(strategyUrl)
     if (!res) {
         e.reply('暂无该版本攻略数据，请稍后再试')
@@ -64,7 +99,7 @@ async function getStrategyImg(e, versionName, versionPath) {
     for (let val of res.data.posts) {
         if (val.post.subject.includes(versionName)) {
             val.image_list.forEach((v, i) => {
-                if (Number(v.size) >= 350000) imgs.push(v.url)
+                if (Number(v.size) >= 600000 && v.format != 'gif') imgs.push(v.url)
               })
             break
         }
