@@ -86,7 +86,7 @@ async function getEvent(moreEvent=false) {
         }
 
         // 网页活动，因为奖励包含抽奖，且不一定准确，开启开关后再显示
-        if (moreEvent && val.name.includes('网页活动') && (/原石|游戏内道具/.test(val.desc) || /原石|游戏内道具/.test(val.name)) && val.end >= now) {
+        if (moreEvent && /网页活动|H5/.test(val.name) && (/原石|游戏内道具/.test(val.desc) || /原石|游戏内道具/.test(val.name)) && val.end >= now) {
             Bot.logger.debug(`获取到满足条件的活动,${val.name}, ${val.desc}`)
             eventList.push(
                 {
