@@ -113,6 +113,9 @@ export async function eventPushJob(e) {
 }
 
 export async function checkEvent(e) {
+    if (e.isGroup) {
+        e.reply("开始查询，若长时间无回复，可能是消息被风控，可尝试私聊查询")
+    }
     let eventList = []
     if (Cfg.get("hoyolab.more_event")) {
         Bot.logger.debug(`查询更多活动`)
