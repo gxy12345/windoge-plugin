@@ -34,7 +34,7 @@ export class windoge extends plugin {
     e.getMysApi = async function (cfg) {
       return await getMysApi(e, cfg)
     }
-    msg = '#' + msg.replace(/#|＃/, '').trim()
+    msg = msg.replace(/#|＃/, '#').trim()
     for (let fn in Windoge.rule) {
       let cfg = Windoge.rule[fn]
       if (Windoge[fn] && new RegExp(cfg.reg).test(msg)) {

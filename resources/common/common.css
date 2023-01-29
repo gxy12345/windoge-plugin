@@ -1,43 +1,32 @@
 @font-face {
-  font-family: "HWZS";
-  src: url("../common/font/华文中宋.TTF");
-  font-weight: normal;
-  font-style: normal;
+  font-family: 'Number';
+  src: url("./font/tttgbnumber.woff") format('woff'), url("./font/tttgbnumber.ttf") format('truetype');
 }
 @font-face {
-  font-family: "Number";
-  src: url("../common/font/tttgbnumber.ttf");
-  font-weight: normal;
-  font-style: normal;
+  font-family: 'NZBZ';
+  src: url("./font/NZBZ.woff") format('woff'), url("./font/NZBZ.ttf") format('truetype');
 }
 @font-face {
-  font-family: "NZBZ";
-  src: url("../common/font/NZBZ.ttf");
-  font-weight: normal;
-  font-style: normal;
+  font-family: 'YS';
+  src: url("./font/HYWH-65W.woff") format('woff'), url("./font/HYWH-65W.ttf") format('truetype');
 }
-@font-face {
-  font-family: "YS";
-  src: url("../common/font/HYWH-85W.ttf");
-  font-weight: normal;
-  font-style: normal;
+.font-YS {
+  font-family: Number, "汉仪文黑-65W", YS, PingFangSC-Medium, "PingFang SC", sans-serif;
 }
-@font-face {
-  font-family: "YS2";
-  src: url("../common/font/HYWH-65W.ttf");
-  font-weight: normal;
-  font-style: normal;
+.font-NZBZ {
+  font-family: Number, "印品南征北战NZBZ体", NZBZ, "汉仪文黑-65W", YS, PingFangSC-Medium, "PingFang SC", sans-serif;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-user-select: none;
   user-select: none;
 }
 body {
   font-size: 18px;
   color: #1e1f20;
-  font-family: Number, YS2, PingFangSC-Medium, PingFang SC, sans-serif;
+  font-family: Number, "汉仪文黑-65W", YS, PingFangSC-Medium, "PingFang SC", sans-serif;
   transform: scale(1.4);
   transform-origin: 0 0;
   width: 600px;
@@ -55,9 +44,13 @@ body {
   margin-top: 30px;
 }
 .head-box .title {
+  font-family: Number, "印品南征北战NZBZ体", NZBZ, "汉仪文黑-65W", YS, PingFangSC-Medium, "PingFang SC", sans-serif;
   font-size: 36px;
-  font-family: NZBZ, sans-serif;
   text-shadow: 0 0 1px #000, 1px 1px 3px rgba(0, 0, 0, 0.9);
+}
+.head-box .title .label {
+  display: inline-block;
+  margin-left: 10px;
 }
 .head-box .genshin_logo {
   position: absolute;
@@ -68,6 +61,10 @@ body {
 .head-box .label {
   font-size: 16px;
   text-shadow: 0 0 1px #000, 1px 1px 3px rgba(0, 0, 0, 0.9);
+}
+.head-box .label span {
+  color: #d3bc8e;
+  padding: 0 2px;
 }
 .notice {
   color: #888;
@@ -82,8 +79,7 @@ body {
   text-shadow: 1px 1px 1px #333;
 }
 .copyright {
-  font-size: 16px;
-  font-family: Number, sans-serif;
+  font-size: 14px;
   text-align: center;
   color: #fff;
   position: relative;
@@ -92,7 +88,6 @@ body {
   margin: 10px 0;
 }
 .copyright .version {
-  font-size: 13px;
   color: #d3bc8e;
   display: inline-block;
   padding: 0 3px;
@@ -102,7 +97,6 @@ body {
   display: inline-block;
   vertical-align: middle;
   padding: 0 5px;
-  font-family: Number, YS;
   border-radius: 4px;
 }
 .cons-0 {
@@ -172,7 +166,52 @@ body {
   background: #ff5722;
   color: #fff;
 }
+/********  Fetter  ********/
+.fetter {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  background: url('./item/fetter.png');
+  background-size: auto 100%;
+}
+.fetter.fetter1 {
+  background-position: 0% 0;
+}
+.fetter.fetter2 {
+  background-position: 11.11111111% 0;
+}
+.fetter.fetter3 {
+  background-position: 22.22222222% 0;
+}
+.fetter.fetter4 {
+  background-position: 33.33333333% 0;
+}
+.fetter.fetter5 {
+  background-position: 44.44444444% 0;
+}
+.fetter.fetter6 {
+  background-position: 55.55555556% 0;
+}
+.fetter.fetter7 {
+  background-position: 66.66666667% 0;
+}
+.fetter.fetter8 {
+  background-position: 77.77777778% 0;
+}
+.fetter.fetter9 {
+  background-position: 88.88888889% 0;
+}
+.fetter.fetter10 {
+  background-position: 100% 0;
+}
 /********  ELEM  ********/
+.elem-hydro .talent-icon {
+  background-image: url("./bg/talent-hydro.png");
+}
+.elem-hydro .elem-bg,
+.hydro-bg {
+  background-image: url("./bg/bg-hydro.jpg");
+}
 .elem-anemo .talent-icon {
   background-image: url("./bg/talent-anemo.png");
 }
@@ -201,19 +240,19 @@ body {
 .geo-bg {
   background-image: url("./bg/bg-geo.jpg");
 }
-.elem-hydro .talent-icon {
-  background-image: url("./bg/talent-hydro.png");
-}
-.elem-hydro .elem-bg,
-.hydro-bg {
-  background-image: url("./bg/bg-hydro.jpg");
-}
 .elem-pyro .talent-icon {
   background-image: url("./bg/talent-pyro.png");
 }
 .elem-pyro .elem-bg,
 .pyro-bg {
   background-image: url("./bg/bg-pyro.jpg");
+}
+.elem-dendro .talent-icon {
+  background-image: url("./bg/talent-dendro.png");
+}
+.elem-dendro .elem-bg,
+.dendro-bg {
+  background-image: url("./bg/bg-dendro.jpg");
 }
 /* cont */
 .cont {
@@ -231,7 +270,6 @@ body {
   background: rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 1px 0 #fff;
   color: #d3bc8e;
-  font-family: Number, YS;
   padding: 10px 20px;
   text-align: left;
   border-radius: 10px 10px 0 0;
@@ -240,34 +278,45 @@ body {
   font-size: 12px;
   color: #aaa;
   margin-left: 10px;
-  font-family: Number, YS;
   font-weight: normal;
+}
+.cont-title.border-less {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  box-shadow: none;
+  padding-bottom: 5px;
 }
 .cont-body {
   padding: 10px 15px;
   font-size: 12px;
   background: rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 1px 0 #fff;
-  font-family: YS;
   font-weight: normal;
-}
-ul.cont-msg {
-  padding-left: 15px;
-}
-ul.cont-msg li {
-  margin: 5px 0;
-}
-ul.cont-msg li strong {
-  font-weight: normal;
-  margin: 0 2px;
-  color: #d3bc8e;
 }
 .cont-footer {
   padding: 10px 15px;
   font-size: 12px;
   background: rgba(0, 0, 0, 0.5);
-  font-family: YS;
   font-weight: normal;
+}
+.cont > ul.cont-msg {
+  display: block;
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.5);
+}
+ul.cont-msg,
+.cont-footer ul {
+  padding-left: 15px;
+}
+ul.cont-msg li,
+.cont-footer ul li {
+  margin: 5px 0;
+  margin-left: 15px;
+}
+ul.cont-msg li strong,
+.cont-footer ul li strong {
+  font-weight: normal;
+  margin: 0 2px;
+  color: #d3bc8e;
 }
 .cont-table {
   display: table;
@@ -299,7 +348,6 @@ ul.cont-msg li strong {
 }
 .cont-table .thead > div,
 .cont-table .thead > td {
-  font-family: YS;
   color: #d3bc8e;
   background: rgba(0, 0, 0, 0.4);
   line-height: 40px;
@@ -307,7 +355,6 @@ ul.cont-msg li strong {
 }
 .cont-table .title,
 .cont-table .th {
-  font-family: YS;
   color: #d3bc8e;
   padding-right: 15px;
   text-align: right;
@@ -320,5 +367,89 @@ ul.cont-msg li strong {
   text-align: center;
   color: #fff;
   margin: 20px 0 10px 0;
+}
+/* item-icon */
+.item-icon {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.item-icon .img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.item-icon.artis .img {
+  width: 84%;
+  height: 84%;
+  margin: 8%;
+}
+.item-icon.star1 {
+  background-image: url("../common/item/bg1.png");
+}
+.item-icon.opacity-bg.star1 {
+  background-image: url("../common/item/bg1-o.png");
+}
+.item-icon.star2 {
+  background-image: url("../common/item/bg2.png");
+}
+.item-icon.opacity-bg.star2 {
+  background-image: url("../common/item/bg2-o.png");
+}
+.item-icon.star3 {
+  background-image: url("../common/item/bg3.png");
+}
+.item-icon.opacity-bg.star3 {
+  background-image: url("../common/item/bg3-o.png");
+}
+.item-icon.star4 {
+  background-image: url("../common/item/bg4.png");
+}
+.item-icon.opacity-bg.star4 {
+  background-image: url("../common/item/bg4-o.png");
+}
+.item-icon.star5 {
+  background-image: url("../common/item/bg5.png");
+}
+.item-icon.opacity-bg.star5 {
+  background-image: url("../common/item/bg5-o.png");
+}
+.item-list {
+  display: flex;
+}
+.item-list .item-card {
+  width: 70px;
+  background: #e7e5d9;
+}
+.item-list .item-icon {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 12px;
+}
+.item-list .item-title {
+  color: #222;
+  font-size: 13px;
+  text-align: center;
+  padding: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.item-list .item-icon {
+  height: initial;
+}
+.item-list .item-badge {
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  color: #fff;
+  padding: 4px 5px 3px;
+  border-radius: 0 0 6px 0;
 }
 /*# sourceMappingURL=common.css.map */

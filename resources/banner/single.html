@@ -1,0 +1,47 @@
+{{extend elemLayout}}
+
+{{block 'css'}}
+<link rel="stylesheet" type="text/css" href="{{_res_path}}/banner/single.css"/>
+{{/block}}
+
+{{block 'main'}}
+
+<div class="basic">
+  <div class="main-pic"
+  style="background-image:url({{item_banner_data.item_info.imageUrl}})"></div>
+  
+  <div class="detail">
+    <div class="char-name">{{item_banner_data.name}}</div>
+
+    <div class="item arti-stat">
+      {{if item_banner_data.item_index > 0 }}
+      <div class="arti-class-title">距离上次UP卡池数</div>
+      <div class="arti-stat-ret">
+        <div><strong class="mark-normal">{{item_banner_data.item_index}}</strong></div>
+      </div>
+      {{else}}
+      <div class="arti-stat-ret-current">
+        <div><strong class="mark-normal">本期UP</strong></div>
+      </div>
+      {{/if}}
+
+    </div>
+
+    <ul class="attr">
+      <li>累计UP次数<strong>{{item_banner_data.total_up_amount}}</strong></li>
+      {{if item_banner_data.item_index > 0 }}
+      <li>上次UP卡池<strong>{{item_banner_data.pool.version}} {{item_banner_data.pool.index}}</strong></li>
+      {{else}}
+      <li>当前卡池<strong>{{item_banner_data.pool.version}} {{item_banner_data.pool.index}}</strong></li>
+      {{/if}}
+      
+      <li>卡池开始时间<strong>{{item_banner_data.pool.start}}</strong></li>
+      <li>卡池结束时间<strong>{{item_banner_data.pool.end}}</strong></li>
+    </ul>
+    <!-- <div class="data-info">
+      <span>当前时间：</span>
+      <span class="time">XXXX XX-XX</span>
+    </div> -->
+  </div>
+
+{{/block}}
