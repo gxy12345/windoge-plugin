@@ -114,7 +114,7 @@ export async function eventPushJob(e) {
 
 export async function checkEvent(e) {
     if (e.isGroup) {
-        e.reply("开始查询，若长时间无回复，可能是消息被风控，可尝试私聊查询")
+        e.reply("开始查询，若长时间无回复，可尝试私聊查询")
     }
     let eventList = []
     if (Cfg.get("hoyolab.more_event")) {
@@ -148,8 +148,8 @@ export async function checkEvent(e) {
             }
             msg += `${descContent}\n`
             msg += `${HoyolabWebHost}${event.event_detail.web_path}`
-            if (event.event_type.includes('Twitch创作者成长营')) {
-                msg += "\nTwitch创作者成长营参加指南: https://docs.qq.com/doc/DQ3hqQXp4V21idUZJ"
+            if (event.event_type.includes('Twitch')) {
+                msg += "\nTwitch直播活动参加指南: https://docs.qq.com/doc/DQ3hqQXp4V21idUZJ"
             }
             if (needMakeMsg) {
                 msgData.push(msg)
