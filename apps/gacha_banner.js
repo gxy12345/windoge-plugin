@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import YAML from 'yaml'
 import Common from "../components/Common.js";
 import { Cfg } from "../components/index.js";
 import { isV3 } from "../components/Changelog.js";
@@ -7,12 +8,14 @@ const _path = process.cwd();
 const res_layout_path = `/plugins/windoge-plugin/resources/common/layout/`;
 const character_banner_data_url = "https://genshin-gacha-banners.52v6.com/data/character.json"
 const weapon_banner_data_url = "https://genshin-gacha-banners.52v6.com/data/weapon.json"
+const weapon_nickname_data_url = "https://raw.fastgit.org/Nwflower/Atlas/master/resource/othername/weapon.yaml"
 
 const character_data_api = "https://info.minigg.cn/characters?query="
 const weapon_data_api = "https://info.minigg.cn/weapons?query="
 
 const charRedisKey = "windoge:banner:char"
 const weaponRedisKey = "windoge:banner:weapon"
+const weaponNicknameRedisKey = "windoge:nickname:weapon"
 
 const nameBlacklist = [
     "刻晴",
@@ -71,6 +74,23 @@ async function getBannerData (is_character) {
     return banner_data
 }
 
+async function getWeaponNickName() {
+    let cacheData = await redis.get(weaponNicknameRedisKey)
+    if (cacheData) {
+      return JSON.parse(cacheData)
+    }
+    let response = await fetch(weapon_nickname_data_url, { method: 'get' })
+    if (!response.ok) {
+      return false
+    }
+    let response_text = await response.text()
+    Bot.logger.debug(response_text)
+    let weapon_name_data = YAML.parse(response_text)
+    Bot.logger.debug(JSON.stringify(weapon_name_data))
+    redis.set(weaponNicknameRedisKey, JSON.stringify(weapon_name_data), { EX: 1800 });
+    return weapon_name_data
+}
+
 function keywordToFullName(keyword) {
     let id;
     if (isV3) {
@@ -88,6 +108,18 @@ function keywordToFullName(keyword) {
         return false
     }
     return name
+}
+
+async function keywordToWeaponFullName(keyword) {
+    let weapon_name_data = await getWeaponNickName()
+    if (!weapon_name_data) return keyword
+    let find_key = (value, inNickname = (a, b) => a.includes(b)) => {
+        return Object.keys(weapon_name_data).find(k => inNickname(weapon_name_data[k], value))
+    }
+    let full_name = find_key(keyword)
+    Bot.logger.debug(`匹配结果: ${full_name}`)
+    if (full_name === undefined) return keyword
+    return full_name
 }
 
 async function getItemList (is_character=true, level=5) {
@@ -145,7 +177,7 @@ export async function getSingleBanner(e, {render}) {
     
     name = keywordToFullName(keyword)
     if (!name) {
-        name = keyword
+        name = await keywordToWeaponFullName(keyword)
         isCharacter = false
     }
 
@@ -155,7 +187,7 @@ export async function getSingleBanner(e, {render}) {
         return true
     }
     if (item_banner_data === -1) {
-        e.reply('未查询到UP记录, 请检查名称是否正确。 注意：武器只支持全名查询')
+        e.reply('未查询到UP记录, 请检查名称是否正确')
         return true
     }
     let msg = []
