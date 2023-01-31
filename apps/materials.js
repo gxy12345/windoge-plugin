@@ -66,12 +66,9 @@ async function getMaterialsPic(type) {
         return false
     }
     let response_json = await response.json()
-    Bot.logger.debug(`响应:${JSON.stringify(response_json)}`)
     let imgUrls = response_json.data.content.contents[0].text.match(/https?:\/\/\S+\.png/g)
     if (!imgUrls) return false
-    Bot.logger.debug(`图片URL列表 ${imgUrls}`)
     let targetImgUrl = imgUrls[materialMap[type].contentIndex]
-    Bot.logger.debug(`图片URL ${targetImgUrl}`)
 
     let cacheData = await redis.get(materialMap[type].redisKey)
     if (!cacheData || cacheData != targetImgUrl) {
@@ -79,7 +76,7 @@ async function getMaterialsPic(type) {
             mkdirsSync(material_download_path)
         }
         Bot.logger.debug(`开始下载${type}素材表`)
-        if (!await common.downFile(targetImgUrl + oss, `${material_download_path}/${type}素材.jpg`)) {
+        if (!await common.downFile(targetImgUrl, `${material_download_path}/${type}素材.png`)) {
             return false
         }
         Bot.logger.debug(`下载${type}素材表完成`)
@@ -98,7 +95,7 @@ export async function material_chart(e) {
         Bot.logger.mark(`无法下载${type}素材表`)
     }
 
-    let path = `${material_download_path}${name}素材.jpg`;
+    let path = `${material_download_path}${name}素材.png`;
     console.log(path);
     if (fs.existsSync(path)) {
         //最后回复消息

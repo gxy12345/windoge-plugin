@@ -18,8 +18,9 @@ const weaponRedisKey = "windoge:banner:weapon"
 const weaponNicknameRedisKey = "windoge:nickname:weapon"
 
 const nameBlacklist = [
-    "刻晴",
-    "提纳里"
+    "刻晴", "提纳里",
+    "狼的末路", "风鹰剑", "阿莫斯之弓", "四风原典", "和璞鸢",
+    "天空之翼", "天空之刃", "天空之傲", "天空之卷", "天空之脊"
 ]
 
 const getFindLatestIndex = (data, name) => {
@@ -69,7 +70,6 @@ async function getBannerData(is_character) {
         });
     }
 
-    Bot.logger.debug(JSON.stringify(banner_data))
     redis.set(redisKey, JSON.stringify(banner_data), { EX: 900 });
     return banner_data
 }
@@ -84,9 +84,7 @@ async function getWeaponNickName() {
         return false
     }
     let response_text = await response.text()
-    Bot.logger.debug(response_text)
     let weapon_name_data = YAML.parse(response_text)
-    Bot.logger.debug(JSON.stringify(weapon_name_data))
     redis.set(weaponNicknameRedisKey, JSON.stringify(weapon_name_data), { EX: 1800 });
     return weapon_name_data
 }
@@ -130,7 +128,11 @@ async function getItemList(is_character = true, level = 5) {
     let unique_list = []
     for (let pool of raw_list) {
         for (let item of pool) {
-            if (!unique_list.includes(item) && !nameBlacklist.includes(item)) {
+            let condition = !unique_list.includes(item)
+            if (!Cfg.get("banner.show_permanent")) {
+                condition = condition && !nameBlacklist.includes(item)
+            }
+            if (condition) {
                 unique_list.push(item)
             }
         }
@@ -226,14 +228,14 @@ export async function getMultipleBanner(e, { render }) {
     banner_data_list.reverse()
     let query_params = {
         is_character: is_character,
-        level: level
+        level: level == 4 ? "四" : "五"
     }
-
-    Bot.logger.debug(JSON.stringify(banner_data_list))
+    let show_permanent = Cfg.get("banner.show_permanent")
 
     return await Common.render_path("banner/multiple", {
         banner_data_list,
         query_params,
+        show_permanent,
     }, {
         e,
         render,

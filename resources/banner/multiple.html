@@ -14,6 +14,12 @@
   {{/if}}
   {{set newest_item = banner_data_list[banner_data_list.length - 1]}}
   <div class="pool-label">当前卡池: {{newest_item.pool.version}} {{newest_item.pool.index}}</div>
+  {{if show_permanent}}
+  <div class="label">当前列表包含常驻角色/武器</div>
+  {{else}}
+  <div class="label">当前列表未包含常驻角色/武器</div>
+  <div class="label">可使用单个命令查询，如#胡桃复刻 #若水up</div>
+  {{/if}}
 </div>
 <div id="profile-stat">
   <div class="cont">
