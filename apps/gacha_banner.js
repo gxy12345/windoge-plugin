@@ -42,20 +42,20 @@ if (isV3) {
     Botcfg = YunzaiApps.mysInfo
 }
 
-async function getData (url) {
+async function getData(url) {
     let response = await fetch(url, { method: 'get' })
     if (!response.ok) {
-      return false
+        return false
     }
     const res = await response.json()
     return res
 }
 
-async function getBannerData (is_character) {
+async function getBannerData(is_character) {
     let redisKey = is_character ? charRedisKey : weaponRedisKey
     let cacheData = await redis.get(redisKey)
     if (cacheData) {
-      return JSON.parse(cacheData)
+        return JSON.parse(cacheData)
     }
     let target_url = is_character ? character_banner_data_url : weapon_banner_data_url
     let banner_data = await getData(target_url)
@@ -77,11 +77,11 @@ async function getBannerData (is_character) {
 async function getWeaponNickName() {
     let cacheData = await redis.get(weaponNicknameRedisKey)
     if (cacheData) {
-      return JSON.parse(cacheData)
+        return JSON.parse(cacheData)
     }
     let response = await fetch(weapon_nickname_data_url, { method: 'get' })
     if (!response.ok) {
-      return false
+        return false
     }
     let response_text = await response.text()
     Bot.logger.debug(response_text)
@@ -122,7 +122,7 @@ async function keywordToWeaponFullName(keyword) {
     return full_name
 }
 
-async function getItemList (is_character=true, level=5) {
+async function getItemList(is_character = true, level = 5) {
     let banner_data = await getBannerData(is_character)
     let raw_list = banner_data.map(pool => pool.items.filter((val, key, arr) => {
         return val.rankType == level ? true : false
@@ -139,13 +139,13 @@ async function getItemList (is_character=true, level=5) {
     return unique_list
 }
 
-async function getSingleItemBanner(name, is_character=true) {
+async function getSingleItemBanner(name, is_character = true) {
     let banner_data = await getBannerData(is_character)
     if (!banner_data) {
         return 0
     }
     let item_index = getFindLatestIndex(banner_data, name)
-    if (item_index<0) {
+    if (item_index < 0) {
         return -1
     }
     let total_up_amount = getCountUpAmount(banner_data, name)
@@ -161,7 +161,7 @@ async function getSingleItemBanner(name, is_character=true) {
         total_up_amount: total_up_amount,
         pool: {
             version: pickUpGacha.version.substr(0, 3),
-            index: pickUpGacha.version.substr(pickUpGacha.version.length-1,1) === "1" ? "上半" : "下半",
+            index: pickUpGacha.version.substr(pickUpGacha.version.length - 1, 1) === "1" ? "上半" : "下半",
             start: pickUpGacha.start,
             end: pickUpGacha.end,
         },
@@ -170,11 +170,11 @@ async function getSingleItemBanner(name, is_character=true) {
 }
 
 
-export async function getSingleBanner(e, {render}) {
+export async function getSingleBanner(e, { render }) {
     let keyword = e.msg.replace(/#|＃|复刻|复刻间隔|up|UP|Up/g, "");
     let isCharacter = true;
     let name;
-    
+
     name = keywordToFullName(keyword)
     if (!name) {
         name = await keywordToWeaponFullName(keyword)
@@ -208,7 +208,7 @@ export async function getSingleBanner(e, {render}) {
     }, res_layout_path)
 }
 
-export async function getMultipleBanner(e, {render}) {
+export async function getMultipleBanner(e, { render }) {
     if (!/角色|武器/.test(e.msg)) {
         e.reply("请回复 #未复刻(4星/5星)角色 或 #未复刻(4星/5星)武器 进行查询")
         return true

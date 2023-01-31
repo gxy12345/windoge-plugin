@@ -18,7 +18,8 @@ git clone https://github.com/gxy12345/windoge-plugin.git ./plugins/windoge-plugi
 * `#XX参考面板`  `#参考面板帮助` 来源howe插件，原作者不再维护，将继续维护
 * `#天赋素材` `#武器素材` `#周本素材` 素材汇总图
 * `#原石预估` 下个版本可以获得的原石预估
-* `#未复刻角色` `#未复刻武器` 各限定角色未复刻时间汇总图
+* `#未复刻(4星/5星)角色` `#未复刻(4星/5星)武器` 各限定角色未复刻时间汇总图
+* `#胡桃复刻` `#胡桃up` `#若水复刻` 查看指定角色或武器的复刻情况
 * `#群通知+群号` `#群通知all` `#群列表` `#群通知帮助` 群发通知
 * `#国际服羊毛` 获取hoyolab上可以白嫖原石活动的报名信息（注意，本功能需要搭配科学上网使用）
 * `#国际服兑换码` 获取当前国际服可用的兑换码（注意，本功能需要搭配科学上网（港或日）使用）
@@ -34,6 +35,7 @@ git clone https://github.com/gxy12345/windoge-plugin.git ./plugins/windoge-plugi
 * [howe-plugin](https://github.com/howe0116/howe-plugin)
 
 
-### 背景图来源
-* [仓库1](https://github.com/cv-hunag/BJT)
-* [仓库2](https://github.com/SmallK111407/BJT-Template)
+### 图像/数据来源
+* [背景图仓库1](https://github.com/cv-hunag/BJT)
+* [背景图仓库2](https://github.com/SmallK111407/BJT-Template)
+* [复刻信息数据](https://github.com/KeyPJ/genshin-gacha-banners)
