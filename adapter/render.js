@@ -21,10 +21,7 @@ export async function render(app = '', tpl = '', data = {}, imgType = 'jpeg') {
 	data.tplFile = `./plugins/${plugin}/resources/${app}/${tpl}.html`
 	data.pluResPath = data._res_path
 	data.pageGotoParams = {
-    waitUntil: [
-      'load'
-    ],
-    timeout: 20000
+		waitUntil: 'networkidle0'
 	}
 	return await puppeteer.screenshot(`${plugin}/${app}/${tpl}`, data)
 }
@@ -45,10 +42,7 @@ export function getRender() {
 		data.tplFile = `./plugins/${plugin}/resources/${app}/${tpl}.html`
 		data.pluResPath = data._res_path
 		data.pageGotoParams = {
-			waitUntil: [
-        'load'
-      ],
-      timeout: 20000
+			waitUntil: 'networkidle0'
 		}
 		return await puppeteer.screenshot(`${plugin}/${app}/${tpl}`, data)
 	}

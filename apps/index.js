@@ -30,7 +30,6 @@ import {
 import {
 	material_chart,
 	primogems_expect,
-	pool_interval
 } from "./materials.js";
 import {
 	checkEvent
@@ -39,10 +38,14 @@ import {
 	OSCode
 } from "./os_code.js"
 import {
-	 gacha_expect
+	gacha_expect
 } from "./gacha_expect.js";
 import { CurrencyRate } from "./currency_rate.js";
 import { AbyssStrategy } from "./abyss_strategy.js";
+import {
+	getSingleBanner,
+	getMultipleBanner
+} from "./gacha_banner.js";
 
 export {
 	updateMiaoPlugin,
@@ -59,7 +62,6 @@ export {
 	refer_Artifacts,
 	material_chart,
 	primogems_expect,
-	pool_interval,
 	preGroupBroadcast,
 	GroupBroadcast,
 	getGroupList,
@@ -69,6 +71,8 @@ export {
 	gacha_expect,
 	CurrencyRate,
 	AbyssStrategy,
+	getSingleBanner,
+	getMultipleBanner,
 };
 const _path = process.cwd();
 
@@ -110,10 +114,10 @@ let rule = {
 		priority: 100,
 		describe: "参考面板说明",
 	},
-	pool_interval: {
-		reg: "^#*未复刻(角色|武器)*$",
-		describe: "角色未复刻间隔"
-	},
+	// pool_interval: {
+	// 	reg: "^#*未复刻(角色|武器)*$",
+	// 	describe: "角色未复刻间隔"
+	// },
 	checkEvent: {
 		reg: "^#*国际服(白嫖|羊毛|活动)$",
 		describe: "国际服hoyolab白嫖原石活动"
@@ -124,19 +128,29 @@ let rule = {
 		priority: 100,
 	},
 	gacha_expect: {
-        reg: "^#(抽卡|[0-6]命)+期望+$",
-        describe: "抽卡期望表"
+		reg: "^#(抽卡|[0-6]命)+期望+$",
+		describe: "抽卡期望表"
 	},
 	CurrencyRate: {
-        reg: "^#(Google|google|谷歌|安卓)?充值(汇率|价格)(all)*$",
-        describe: "充值汇率"
+		reg: "^#(Google|google|谷歌|安卓)?充值(汇率|价格)(all)*$",
+		describe: "充值汇率"
 	},
 	AbyssStrategy: {
 		reg: "^#?(更新)?([1-9]\.[0-9])深渊攻略[1-3]?$",
-        describe: "深渊攻略",
+		describe: "深渊攻略",
 		priority: 30
 	},
-	
+	getMultipleBanner: {
+		reg: /^#未复刻(4星|四星|5星|五星)*(角色|武器)*$/,
+		describe: "查询角色/武器的复刻信息",
+		priority: 200
+	},
+	getSingleBanner: {
+		reg: /^#(.)+(复刻|复刻间隔|up|UP|Up)$/,
+		describe: "查询单个角色/武器的复刻信息",
+		priority: 300
+	},
+
 	...adminRule,
 	...broadcastRule
 };

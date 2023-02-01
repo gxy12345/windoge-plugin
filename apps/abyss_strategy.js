@@ -23,24 +23,24 @@ const source = ['原神观测枢', '李沐瑟', '大数据库里']
 
 const oss = '?x-oss-process=image//resize,s_1200/quality,q_90/auto-orient,0/interlace,1/format,jpg'
 
-async function getData (url) {
+async function getData(url) {
     let response = await fetch(url, { method: 'get' })
     if (!response.ok) {
-      return false
+        return false
     }
     const res = await response.json()
     return res
-  }
+}
 
 function mkdirsSync(dirname) {
-if (fs.existsSync(dirname)) {
-    return true;
-} else {
-    if (mkdirsSync(path.dirname(dirname))) {
-    fs.mkdirSync(dirname);
-    return true;
+    if (fs.existsSync(dirname)) {
+        return true;
+    } else {
+        if (mkdirsSync(path.dirname(dirname))) {
+            fs.mkdirSync(dirname);
+            return true;
+        }
     }
-}
 }
 
 export async function AbyssStrategy(e) {
@@ -60,7 +60,7 @@ export async function AbyssStrategy(e) {
     }
 
     let strategyPics = fs.readdirSync(versionPath)
-    if (strategyPics.length > 0  && !isUpdate) {
+    if (strategyPics.length > 0 && !isUpdate) {
         Bot.logger.debug(`攻略文件：${strategyPics}`)
         let msgs = []
         for (let img_name of strategyPics) {
@@ -100,7 +100,7 @@ async function getStrategyImg(e, versionName, source_group, versionPath) {
         if (val.post.subject.includes(versionName)) {
             val.image_list.forEach((v, i) => {
                 if (Number(v.size) >= 600000 && v.format != 'gif') imgs.push(v.url)
-              })
+            })
             break
         }
     }

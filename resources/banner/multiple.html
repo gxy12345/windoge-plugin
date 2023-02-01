@@ -1,0 +1,61 @@
+{{extend defaultLayout}}
+
+{{block 'css'}}
+<link rel="stylesheet" type="text/css" href="{{_res_path}}/banner/multiple.css"/>
+{{/block}}
+
+
+{{block 'main'}}
+<div class="head-box">
+  {{if query_params.is_character}}
+  <div class="title">#未复刻{{query_params.level}}星角色</div>
+  {{else}}
+  <div class="title">#未复刻{{query_params.level}}星武器</div>
+  {{/if}}
+  {{set newest_item = banner_data_list[banner_data_list.length - 1]}}
+  <div class="pool-label">当前卡池: {{newest_item.pool.version}} {{newest_item.pool.index}}</div>
+  {{if show_permanent}}
+  <div class="label">当前列表包含常驻角色/武器</div>
+  {{else}}
+  <div class="label">当前列表未包含常驻角色/武器</div>
+  <div class="label">可使用单个命令查询，如#胡桃复刻 #若水up</div>
+  {{/if}}
+</div>
+<div id="profile-stat">
+  <div class="cont">
+    <div class="cont-table">
+      <div class="avatar tr thead">
+        <div class="td-idx">#</div>
+        <div class="td-name">角色</div>
+        <div class="td-total-up">累计UP次数</div>
+        <div class="td-lastpool">上次UP卡池</div>
+        <div class="td-poolcount">距今间隔</div>
+      </div>
+      {{each banner_data_list item idx}}
+      <div class="avatar tr">
+        <div class="td td-idx  star{{item.item_info.rankType}}">{{idx+1}}</div>
+        <div class="td td-name  star{{item.item_info.rankType}}">
+          <div class="item-banner">
+            <div class="item-icon char-icon star{{item.item_info.rankType}}">
+              <span class="img"
+                    style="background-image:url({{item.item_info.imageUrl}})"></span>
+            </div>
+
+            <span class="item-name">{{item.name}}</span>
+          </div>
+        </div>
+        <div class="td-total-up">{{item.total_up_amount}}</div>
+        <div class="td-lastpool">{{item.pool.version}} {{item.pool.index}}</div>
+        {{if item.item_index > 0 }}
+        <div class="td-poolcount">{{item.item_index}}个卡池</div>
+        {{else}}
+        <div class="td-poolcount">本期UP</div>
+        {{/if}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+
+{{/block}}

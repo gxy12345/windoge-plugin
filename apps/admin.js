@@ -69,6 +69,7 @@ let cfgMap = {
 	"汇率key": "os.currency_key",
 	"深渊攻略转发": "abyss_strategy.forward",
 	"深渊攻略来源": "abyss_strategy.default",
+	"显示常驻": "banner.show_permanent"
 
 };
 let sysCfgReg = `^#windoge设置\s*(${lodash.keys(cfgMap).join("|")})?\s*(.*)$`;
@@ -145,6 +146,7 @@ export async function sysCfg(e, {
 		hoyolabMoreEvent: getStatus("hoyolab.more_event",false),
 		osCode: getStatus("os.code",false),
 		CurrencyAPIKey: getStatus("os.currency_key", false),
+		bannerShowPermanent: getStatus("banner.show_permanent",false),
 		AbyssForward: getStatus("abyss_strategy.forward", false),
 		AbyssDefault: Cfg.get("abyss_strategy.default", 1),
 		bg: await rodom(), //获取底图

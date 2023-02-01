@@ -1,0 +1,388 @@
+body {
+  background: url('../common/theme/bg-01.jpg') left center;
+  background-size: 100% auto;
+}
+.container {
+  background: url('../common/theme/main-01.png') center -25px no-repeat;
+  background-size: 100% auto;
+}
+.head-box {
+  margin-top: 45px;
+  margin-bottom: 45px;
+}
+.head-box .pool-label {
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 1px #000, 1px 1px 3px rgba(0, 0, 0, 0.9);
+}
+#profile-stat {
+  display: table;
+  border-collapse: collapse;
+  width: calc(100% + 30px);
+  margin: 0 -15px -5px;
+  overflow: hidden;
+}
+#profile-stat .item-banner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 36px;
+}
+#profile-stat .item-banner .item-icon {
+  z-index: 10;
+}
+#profile-stat .level {
+  border-radius: 3px 0 0 3px;
+  width: 25px;
+  white-space: nowrap;
+  display: inline-block;
+}
+#profile-stat .level:before {
+  content: "Lv";
+  display: inline-block;
+  font-size: 12px;
+  transform: scale(0.7);
+  transform-origin: right 55%;
+  margin-left: -3px;
+}
+.cont {
+  font-size: 15px;
+  background: none;
+  /*
+      .star(1, rgba(171, 171, 171, .5));
+      .star(2, rgba(208, 255, 190, .5));
+      .star(3, rgba(190, 208, 255, .5));
+      .star(4, rgba(223, 190, 255, .5));
+      .star(5, rgba(255, 228, 180, .5));
+  */
+}
+.cont .lastpool,
+.cont .total-up,
+.cont .poolcount {
+  height: 22px;
+  line-height: 22px;
+  display: inline-block;
+  width: 19px;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 15px;
+  position: relative;
+}
+.cont .cons {
+  width: 16px;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+.cont .fetter {
+  width: 32px;
+  height: 32px;
+}
+.cont .item-name {
+  padding-left: 10px;
+  text-align: left;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.8);
+}
+.cont .tr.thead {
+  background: rgba(0, 0, 0, 0.4);
+  font-weight: bold;
+}
+.cont .tr.thead > div {
+  box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+.cont .tr.thead .td-talent {
+  color: #d3bc8e;
+}
+.cont .tr {
+  color: #333;
+  white-space: nowrap;
+}
+.cont .tr .td {
+  box-shadow: 0 0 1px 0 rgba(100, 100, 100, 0.3) inset;
+}
+.cont .tr .td.star1 {
+  background: rgba(200, 200, 200, 0.35);
+}
+.cont .tr .td.star1 .item-name {
+  color: #333;
+}
+.cont .tr .td.star2 {
+  background: rgba(168, 255, 133, 0.35);
+}
+.cont .tr .td.star2 .item-name {
+  color: #333;
+}
+.cont .tr .td.star3 {
+  background: rgba(137, 168, 255, 0.35);
+}
+.cont .tr .td.star3 .item-name {
+  color: #333;
+}
+.cont .tr .td.star4 {
+  background: rgba(195, 134, 255, 0.35);
+}
+.cont .tr .td.star4 .item-name {
+  color: #720465;
+}
+.cont .tr .td.star5 {
+  background: rgba(255, 212, 132, 0.35);
+}
+.cont .tr .td.star5 .item-name {
+  color: #6f4b00;
+}
+.cont .tr.thead {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+.cont .tr.thead > div {
+  color: #d3bc8e !important;
+}
+.cont .tr:nth-child(odd) {
+  background: #ffffff;
+}
+.cont .tr:nth-child(even) {
+  background: #f0f0f0;
+}
+.cont .tr > div {
+  text-align: center;
+  height: 36px;
+  vertical-align: middle;
+  line-height: 36px;
+  box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+.cont .tr > div * {
+  vertical-align: middle;
+}
+.cont .tr .td-idx {
+  width: 40px;
+}
+.cont .tr .td-name {
+  text-align: left;
+  width: 100px;
+  padding-left: 10px;
+}
+.cont .tr .td-name .item-name {
+  width: 100px;
+}
+.cont .tr .td-name .char-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  display: inline-block;
+  overflow: visible;
+  background: none;
+}
+.cont .tr .td-name .char-icon .img {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  top: 0;
+  left: 0;
+  border-radius: 0 0 6px 12px;
+}
+.cont .tr .td-total-up {
+  width: 50px;
+  text-align: center;
+}
+.cont .tr .td-lastpool {
+  width: 100px;
+  text-align: center;
+}
+.cont .tr .td-poolcount {
+  width: 120px;
+  text-align: center;
+}
+.cont .tr .td-fetter {
+  width: 40px;
+  text-align: center;
+}
+.cont .tr .td-cons {
+  width: 40px;
+  text-align: center;
+}
+.cont .tr .td-talent {
+  width: 35px;
+  box-shadow: 0 0 1px 0 rgba(150, 150, 150, 0.5);
+}
+.cont .tr .td-weapon {
+  text-align: left;
+  padding-left: 3px;
+}
+.cont .tr .td-weapon .level {
+  font-size: 12px;
+  transform: scale(0.9);
+  text-align: left;
+}
+.cont .tr .td-weapon .cons {
+  transform: scale(0.8);
+  margin-right: -2px;
+  font-size: 12px;
+  padding: 0;
+  height: 16px;
+  line-height: 16px;
+  width: 14px;
+}
+.cont .tr .td-weapon .weapon-icon {
+  border-radius: 0;
+  background: none;
+}
+.cont .tr .td-weapon .item-name {
+  padding-left: 2px;
+  padding-right: 10px;
+  font-size: 12px;
+}
+.cont .tr .weapon-icon {
+  width: 28px;
+  display: inline-block;
+  overflow: visible;
+}
+.cont .tr .weapon-icon .img {
+  width: 28px;
+  height: 36px;
+  margin: 0;
+}
+.cont .tr .talent-plus {
+  font-weight: bold;
+  color: #006cc7;
+  font-size: 15px;
+  text-shadow: 0px 0px 1px #fff;
+}
+.cont .tr .lv1 {
+  background: rgba(60, 63, 65, 0.3);
+}
+.cont .tr .lv1.talent-plus {
+  color: #333;
+}
+.cont .tr .lv2 {
+  background: rgba(23, 184, 58, 0.5);
+}
+.cont .tr .lv2.talent-plus {
+  color: #005800;
+}
+.cont .tr .lv3 {
+  background: rgba(27, 128, 212, 0.5);
+}
+.cont .tr .lv3.talent-plus {
+  color: #333;
+}
+.cont .tr .lv4 {
+  background: rgba(146, 90, 255, 0.55);
+}
+.cont .tr .lv4.talent-plus {
+  color: #720465;
+}
+.cont .tr .lv5 {
+  background: url("../common/item/crown-o.png") center center no-repeat rgba(255, 36, 26, 0.55);
+  background-size: contain;
+}
+.cont .tr .lv5.talent-plus {
+  color: #b70000;
+}
+.cont .td-artis {
+  width: 115px;
+  text-align: left;
+}
+.cont .td-artis.class-ACE,
+.cont .td-artis.class-ACE² {
+  background: rgba(255, 228, 180, 0.5);
+}
+.cont .td-artis.class-ACE .artis-mark-class,
+.cont .td-artis.class-ACE² .artis-mark-class {
+  background: #ff5722;
+}
+.cont .td-artis.class-SSS,
+.cont .td-artis.class-SS {
+  background: rgba(223, 190, 255, 0.5);
+}
+.cont .td-artis.class-SSS .artis-mark-class,
+.cont .td-artis.class-SS .artis-mark-class {
+  background: #531ba9cf;
+}
+.cont .td-artis.class-S,
+.cont .td-artis.class-A {
+  background: rgba(190, 208, 255, 0.5);
+}
+.cont .td-artis.class-S .artis-mark-class,
+.cont .td-artis.class-A .artis-mark-class {
+  background: #3955b7;
+}
+.cont .td-artis.class-B,
+.cont .td-artis.class-C,
+.cont .td-artis.class-D {
+  background: rgba(171, 171, 171, 0.5);
+}
+.cont .td-artis.class-B .artis-mark-class,
+.cont .td-artis.class-C .artis-mark-class,
+.cont .td-artis.class-D .artis-mark-class {
+  background: #aaa;
+}
+.cont .avatar-artis {
+  margin-left: 5px;
+  text-align: left;
+  position: relative;
+  z-index: 10;
+}
+.cont .avatar-artis .artis {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  box-shadow: 0 0 1px 0 #ffe4b4;
+  display: inline-block;
+}
+.cont .avatar-artis .artis.no-artis {
+  background: #bbb;
+}
+.cont .avatar-artis .no-artis {
+  background: url(../common/item/artifact-icon.webp) center no-repeat;
+  background-size: auto 80%;
+}
+.cont .avatar-artis.artis2 .img {
+  position: absolute;
+  transform: scale(0.7);
+  width: 92%;
+  height: 92%;
+  margin: 4%;
+}
+.cont .avatar-artis.artis2 .img:first-child {
+  transform-origin: left top;
+}
+.cont .avatar-artis.artis2 .img:last-child {
+  transform-origin: right bottom;
+}
+.cont .artis-mark-class {
+  width: 28px;
+  font-size: 12px;
+  border-radius: 5px;
+  display: inline-block;
+  text-align: center;
+  background: rgba(51, 51, 51, 0.68);
+  height: 20px;
+  line-height: 20px;
+  box-shadow: 0 0 1px 0 #ffe4b4;
+  position: relative;
+  z-index: 9;
+  margin: 0 -2px;
+  transform: scale(0.7);
+  color: #fff;
+}
+.cont .artis-na {
+  padding-left: 12px;
+  white-space: nowrap;
+  transform: scale(0.8);
+  transform-origin: left center;
+  color: #888;
+  font-size: 12px;
+  margin-right: -60px;
+}
+.cont-notice {
+  color: #888;
+  background: rgba(255, 255, 255, 0.4);
+  font-size: 13px;
+  text-align: center;
+  padding: 8px;
+}
+.cont-notice span {
+  padding: 0 3px;
+  color: #555;
+}
+/*# sourceMappingURL=profile-stat.css.map */
