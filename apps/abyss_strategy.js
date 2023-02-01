@@ -21,7 +21,7 @@ const collection_id = [
     1524064,
 
 ]
-const source = ['原神观测枢', '李沐瑟', '大数据库里']
+const source = ['原神观测枢', '李沐瑟', '大数据库里', '若伊安']
 
 const oss = '?x-oss-process=image//resize,s_1200/quality,q_90/auto-orient,0/interlace,1/format,jpg'
 
