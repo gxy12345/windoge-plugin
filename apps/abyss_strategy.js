@@ -17,6 +17,8 @@ const collection_id = [
     980743,
     // 大数据库里
     1380672,
+    // 若伊安
+    1524064,
 
 ]
 const source = ['原神观测枢', '李沐瑟', '大数据库里']
@@ -47,7 +49,7 @@ export async function AbyssStrategy(e) {
     // if (!fs.existsSync(abyss_strategy_path)) {
     //     fs.mkdirSync(abyss_strategy_path)
     // }
-    let match = /^#?(更新)?(\d\.\d)深渊攻略([1-3])?$/.exec(e.msg)
+    let match = /^#?(更新)?(\d\.\d)深渊攻略([1-4])?$/.exec(e.msg)
     let isUpdate = !!match[1]
     let versionName = match[2]
     let default_group = Number(Cfg.get("abyss_strategy.default", 1))
