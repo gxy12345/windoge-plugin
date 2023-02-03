@@ -15,13 +15,13 @@ const collection_id = [
     347388,
     // 李沐瑟
     980743,
-    // 大数据库里
-    1380672,
     // 茗血茶
     1519172,
+    // 大数据库里
+    1380672,
 
 ]
-const source = ['原神观测枢', '李沐瑟', '大数据库里', '若伊安']
+const source = ['原神观测枢', '李沐瑟', '茗血茶', '大数据库里']
 
 const oss = '?x-oss-process=image//resize,s_1200/quality,q_90/auto-orient,0/interlace,1/format,jpg'
 
