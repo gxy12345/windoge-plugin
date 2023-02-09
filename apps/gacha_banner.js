@@ -165,7 +165,7 @@ async function getSingleItemBanner(name, is_character = true) {
     }
     let pickUpGacha = banner_data[item_index];
     let item_info = pickUpGacha.items.find(item => item.name == name)
-    item_info.imageUrl = `https://upload-os-bbs.mihoyo.com/${item_info.imageUrl}`
+    item_info.imageUrl = `https://upload-bbs.mihoyo.com/${item_info.imageUrl}`
     return {
         name: name,
         item_index: item_index,
