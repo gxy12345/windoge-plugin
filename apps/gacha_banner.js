@@ -6,8 +6,16 @@ import { isV3 } from "../components/Changelog.js";
 
 const _path = process.cwd();
 const res_layout_path = `/plugins/windoge-plugin/resources/common/layout/`;
-const character_banner_data_url = "https://genshin-gacha-banners.52v6.com/data/character.json"
-const weapon_banner_data_url = "https://genshin-gacha-banners.52v6.com/data/weapon.json"
+const character_banner_data_url = [
+    "https://genshin-gacha-banners.52v6.com/data/character.json",
+    "https://raw.fastgit.org/KeyPJ/genshin-gacha-banners/master/public/data/character.json",
+    "https://raw.githubusercontent.com/KeyPJ/genshin-gacha-banners/master/public/data/character.json"
+]
+const weapon_banner_data_url = [
+    "https://genshin-gacha-banners.52v6.com/data/weapon.json",
+    "https://raw.fastgit.org/KeyPJ/genshin-gacha-banners/master/public/data/weapon.json",
+    "https://raw.githubusercontent.com/KeyPJ/genshin-gacha-banners/master/public/data/weapon.json"
+]
 const weapon_nickname_data_url = "https://raw.fastgit.org/Nwflower/Atlas/master/resource/othername/weapon.yaml"
 
 const character_data_api = "https://info.minigg.cn/characters?query="
@@ -58,7 +66,8 @@ async function getBannerData(is_character) {
     if (cacheData) {
         return JSON.parse(cacheData)
     }
-    let target_url = is_character ? character_banner_data_url : weapon_banner_data_url
+    let banner_data_index = Cfg.get("banner.data_source", 0)
+    let target_url = is_character ? character_banner_data_url[banner_data_index] : weapon_banner_data_url[banner_data_index]
     let banner_data = await getData(target_url)
     // 处理角色名不对应的数据
     if (is_character) {

@@ -69,7 +69,8 @@ let cfgMap = {
 	"汇率key": "os.currency_key",
 	"深渊攻略转发": "abyss_strategy.forward",
 	"深渊攻略来源": "abyss_strategy.default",
-	"显示常驻": "banner.show_permanent"
+	"显示常驻": "banner.show_permanent",
+	"卡池数据源": "banner.data_source"
 
 };
 let sysCfgReg = `^#windoge设置\s*(${lodash.keys(cfgMap).join("|")})?\s*(.*)$`;
@@ -119,18 +120,20 @@ export async function sysCfg(e, {
 
 		// 设置模式
 		let val = regRet[2] || "";
-		
+
 		let cfgKey = cfgMap[regRet[1]];
 
 		if (cfgKey === "sys.scale") {
 			val = Math.min(200, Math.max(50, val * 1 || 100));
-		} else if(cfgKey === "mb.len"){
-			val = Math.min(2,Math.max(val,0));
-		} else if(cfgKey === "os.currency_key"){
+		} else if (cfgKey === "mb.len") {
+			val = Math.min(2, Math.max(val, 0));
+		} else if (cfgKey === "os.currency_key") {
 			val = val;
-		} else if(cfgKey === "abyss_strategy.default"){
-			val = Math.min(3, Math.max(val, 1));
-		}  else {
+		} else if (cfgKey === "abyss_strategy.default") {
+			val = Math.min(4, Math.max(val, 1));
+		} else if (cfgKey === "banner.data_source") {
+			val = Math.min(2, Math.max(val, 0));
+		} else {
 			val = !/关闭/.test(val);
 		}
 		if (cfgKey) {
@@ -140,13 +143,14 @@ export async function sysCfg(e, {
 	// e.reply("设置成功！！");
 	// return true;
 	let cfg = {
-		Note: getStatus("sys.Note",false),
-		len:Cfg.get("mb.len", 0),
-		poke: getStatus("note.poke",false),
-		hoyolabMoreEvent: getStatus("hoyolab.more_event",false),
-		osCode: getStatus("os.code",false),
+		Note: getStatus("sys.Note", false),
+		len: Cfg.get("mb.len", 0),
+		poke: getStatus("note.poke", false),
+		hoyolabMoreEvent: getStatus("hoyolab.more_event", false),
+		osCode: getStatus("os.code", false),
 		CurrencyAPIKey: getStatus("os.currency_key", false),
-		bannerShowPermanent: getStatus("banner.show_permanent",false),
+		bannerShowPermanent: getStatus("banner.show_permanent", false),
+		bannerDataSource: Cfg.get("banner.data_source", 0),
 		AbyssForward: getStatus("abyss_strategy.forward", false),
 		AbyssDefault: Cfg.get("abyss_strategy.default", 1),
 		bg: await rodom(), //获取底图
@@ -161,7 +165,7 @@ export async function sysCfg(e, {
 	});
 }
 
-const rodom = async function() {
+const rodom = async function () {
 	var image = fs.readdirSync(`./plugins/windoge-plugin/resources/admin/imgs/bg`);
 	var list_img = [];
 	for (let val of image) {
@@ -171,14 +175,14 @@ const rodom = async function() {
 	return imgs;
 }
 
-const checkAuth = async function(e) {
+const checkAuth = async function (e) {
 	return await e.checkAuth({
 		auth: "master",
 		replyMsg: `只有主人才能命令我哦~
     (*/ω＼*)`
 	});
 }
-const getStatus = function(rote, def = true) {
+const getStatus = function (rote, def = true) {
 	if (Cfg.get(rote, def)) {
 		if (rote === "os.currency_key") {
 			return `<div class="cfg-status" >已设置</div>`;
@@ -217,9 +221,9 @@ export async function updateNoteRes(e) {
 		}
 		exec(command, {
 			cwd: `${resPath}/BJT/`
-		}, function(error, stdout, stderr) {
+		}, function (error, stdout, stderr) {
 			//console.log(stdout);
-			if (/Already up to date/.test(stdout)||stdout.includes("最新")) {
+			if (/Already up to date/.test(stdout) || stdout.includes("最新")) {
 				e.reply("【背景图库1】目前所有图片都已经是最新了~");
 				return true;
 			}
@@ -236,9 +240,9 @@ export async function updateNoteRes(e) {
 		});
 		exec(command, {
 			cwd: `${resPath}/BJT-Template/`
-		}, function(error, stdout, stderr) {
+		}, function (error, stdout, stderr) {
 			//console.log(stdout);
-			if (/Already up to date/.test(stdout)||stdout.includes("最新")) {
+			if (/Already up to date/.test(stdout) || stdout.includes("最新")) {
 				e.reply("【背景图库2】目前所有图片都已经是最新了~");
 				return true;
 			}
@@ -257,10 +261,10 @@ export async function updateNoteRes(e) {
 		let BJTDownloadStatus1 = true;
 		let BJTDownloadStatus2 = true;
 		e.reply("开始尝试安装背景图资源，可能会需要一段时间，请耐心等待~");
-		if (!resBJTStatus){
+		if (!resBJTStatus) {
 			BJTDownloadStatus1 = false;
 			command = `git clone https://github.com/cv-hunag/BJT.git "${resPath}/BJT/"`
-			exec(command, function(error, stdout, stderr) {
+			exec(command, function (error, stdout, stderr) {
 				if (error) {
 					e.reply("【背景图库1】安装失败！\nError code: " + error.code + "\n" + error.stack + "\n 请稍后重试。");
 				} else {
@@ -270,10 +274,10 @@ export async function updateNoteRes(e) {
 				}
 			});
 		}
-		if (!resBJT2Status){
+		if (!resBJT2Status) {
 			BJTDownloadStatus2 = false;
 			command = `git clone https://github.com/SmallK111407/BJT-Template.git "${resPath}/BJT-Template/"`
-			exec(command, function(error, stdout, stderr) {
+			exec(command, function (error, stdout, stderr) {
 				if (error) {
 					e.reply("【背景图库2】安装失败！\nError code: " + error.code + "\n" + error.stack + "\n 请稍后重试。");
 				} else {
@@ -300,7 +304,7 @@ export async function setNoteRes(e) {
 		e.reply("未找到背景图资源,请先使用 #便签背景图更新 命令获取背景图")
 		return true
 	}
-	
+
 	let templateIndex = e.msg.replace("#导入便签背景图", "");
 	let templateKey = `template${templateIndex}`
 	if (!resBJTStatus && templatePath[templateKey].source == 1) {
@@ -336,7 +340,7 @@ export async function clearNoteRes(e) {
 	let command = "git rev-parse HEAD"
 	exec(command, {
 		cwd: `${_path}/plugins/windoge-plugin/`
-	}, function(error, stdout, stderr) {
+	}, function (error, stdout, stderr) {
 		Bot.logger.mark(`最新commit-id: ${stdout.replace("\n", "")}`);
 
 		currentCommitId = stdout.replace("\n", "")
@@ -348,7 +352,7 @@ export async function clearNoteRes(e) {
 		command = `git checkout ${currentCommitId} resources/dailyNote`
 		exec(command, {
 			cwd: `${_path}/plugins/windoge-plugin/`
-		}, function(error, stdout, stderr) {
+		}, function (error, stdout, stderr) {
 			if (error) {
 				e.reply("恢复默认模板失败！\nError code: " + error.code + "\n" + error.stack + "\n 请稍后重试。");
 				return true;
@@ -377,9 +381,9 @@ export async function updateMiaoPlugin(e) {
 	}
 	exec(command, {
 		cwd: `${_path}/plugins/windoge-plugin/`
-	}, function(error, stdout, stderr) {
+	}, function (error, stdout, stderr) {
 		//console.log(stdout);
-		if (/Already up[ -]to[ -]date/.test(stdout)||stdout.includes("最新")) {
+		if (/Already up[ -]to[ -]date/.test(stdout) || stdout.includes("最新")) {
 			e.reply("目前已经是最新版windoge插件了~");
 			return true;
 		}
@@ -395,12 +399,12 @@ export async function updateMiaoPlugin(e) {
 		}), {
 			EX: 30
 		});
-		timer = setTimeout(function() {
+		timer = setTimeout(function () {
 			let command = `npm run start`;
 			if (process.argv[1].includes("pm2")) {
 				command = `npm run restart`;
 			}
-			exec(command, function(error, stdout, stderr) {
+			exec(command, function (error, stdout, stderr) {
 				if (error) {
 					e.reply("自动重启失败，请手动重启以应用新版windoge插件。\nError code: " + error.code + "\n" +
 						error.stack + "\n");
