@@ -26,6 +26,7 @@ git clone https://github.com/gxy12345/windoge-plugin.git ./plugins/windoge-plugi
 * `#抽卡期望` `#2命期望` 查询指定命座的抽数期望表
 * `#充值价格` `#充值汇率` `#Google充值汇率` 查询国际服不同货币充值价格最低的地区。需要自行申请API Key，[申请地址](https://www.exchangerate-api.com/)
 * `#3.3深渊攻略(1-3)` `#更新3.3深渊攻略` 从米游社获取深渊攻略图并发送
+* `#月莲采集路线` `#钩钩果采集` 从米游社获取素材采集路线攻略
 * 待更新...
 
 

@@ -46,6 +46,7 @@ import {
 	getSingleBanner,
 	getMultipleBanner
 } from "./gacha_banner.js";
+import { MaterialRoute } from "./materials_route.js";
 
 export {
 	updateMiaoPlugin,
@@ -73,6 +74,7 @@ export {
 	AbyssStrategy,
 	getSingleBanner,
 	getMultipleBanner,
+	MaterialRoute,
 };
 const _path = process.cwd();
 
@@ -149,6 +151,10 @@ let rule = {
 		reg: /^#(.)+(复刻|复刻间隔|up|UP|Up)$/,
 		describe: "查询单个角色/武器的复刻信息",
 		priority: 300
+	},
+	MaterialRoute: {
+		reg: /^#?(.+)(收集|采集|收集路线|采集路线)$/,
+		describe: "查询素材采集路线",
 	},
 
 	...adminRule,
