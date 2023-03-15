@@ -7,16 +7,16 @@ import { isV3 } from "../components/Changelog.js";
 const _path = process.cwd();
 const res_layout_path = `/plugins/windoge-plugin/resources/common/layout/`;
 const character_banner_data_url = [
-    "https://genshin-gacha-banners.52v6.com/data/character.json",
+    "https://raw.fastgit.org/gxy12345/windoge-plugin/main/config/banner/character.json",
     "https://raw.fastgit.org/KeyPJ/genshin-gacha-banners/master/public/data/character.json",
     "https://raw.githubusercontent.com/KeyPJ/genshin-gacha-banners/master/public/data/character.json",
-    "https://raw.fastgit.org/gxy12345/windoge-plugin/main/config/banner/character.json"
+    "https://genshin-gacha-banners.52v6.com/data/character.json",
 ]
 const weapon_banner_data_url = [
-    "https://genshin-gacha-banners.52v6.com/data/weapon.json",
+    "https://raw.fastgit.org/gxy12345/windoge-plugin/main/config/banner/weapon.json",
     "https://raw.fastgit.org/KeyPJ/genshin-gacha-banners/master/public/data/weapon.json",
     "https://raw.githubusercontent.com/KeyPJ/genshin-gacha-banners/master/public/data/weapon.json",
-    "https://raw.fastgit.org/gxy12345/windoge-plugin/main/config/banner/weapon.json"
+    "https://genshin-gacha-banners.52v6.com/data/weapon.json",
 ]
 const weapon_nickname_data_url = "https://raw.fastgit.org/Nwflower/Atlas/master/resource/othername/weapon.yaml"
 
