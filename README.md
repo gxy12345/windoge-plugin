@@ -40,3 +40,4 @@ git clone https://github.com/gxy12345/windoge-plugin.git ./plugins/windoge-plugi
 * [背景图仓库1](https://github.com/cv-hunag/BJT)
 * [背景图仓库2](https://github.com/SmallK111407/BJT-Template)
 * [复刻信息数据](https://github.com/KeyPJ/genshin-gacha-banners)
+* [武器别名数据](https://github.com/Nwflower/Atlas)

@@ -132,7 +132,7 @@ export async function sysCfg(e, {
 		} else if (cfgKey === "abyss_strategy.default") {
 			val = Math.min(4, Math.max(val, 1));
 		} else if (cfgKey === "banner.data_source") {
-			val = Math.min(2, Math.max(val, 0));
+			val = Math.min(3, Math.max(val, 0));
 		} else {
 			val = !/关闭/.test(val);
 		}
