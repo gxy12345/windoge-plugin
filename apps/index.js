@@ -46,7 +46,7 @@ import {
 	getSingleBanner,
 	getMultipleBanner
 } from "./gacha_banner.js";
-import { MaterialRoute } from "./materials_route.js";
+import { MaterialRoute, CharMaterialRoute } from "./materials_route.js";
 
 export {
 	updateMiaoPlugin,
@@ -75,6 +75,7 @@ export {
 	getSingleBanner,
 	getMultipleBanner,
 	MaterialRoute,
+	CharMaterialRoute,
 };
 const _path = process.cwd();
 
@@ -155,6 +156,10 @@ let rule = {
 	MaterialRoute: {
 		reg: /^#?(.+)(收集|采集|讨伐|收集路线|采集路线|讨伐路线)$/,
 		describe: "查询素材采集路线",
+	},
+	CharMaterialRoute: {
+		reg: /^#?(.+)(培养|突破|养成)(素材|材料)?收集$/,
+		describe: "查询角色素材收集攻略",
 	},
 
 	...adminRule,
