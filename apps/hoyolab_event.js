@@ -6,6 +6,8 @@ import {
     Data
 } from "../components/index.js";
 import utils from "./utils.js";
+import yunzaicfg from "../../../lib/config/config.js";
+import HttpsProxyAgent from "https-proxy-agent";
 
 
 const _path = process.cwd();
@@ -18,6 +20,14 @@ const reqHeaders = {
     "x-rpc-show-translated": true,
 }
 
+async function getProxy () {
+    let proxyAddress = yunzaicfg.bot.proxyAddress
+    if (!proxyAddress) return null
+    if (proxyAddress === 'http://0.0.0.0:0') return null
+
+    return new HttpsProxyAgent(proxyAddress)
+}
+
 async function getEvent(moreEvent=false) {
     const redisKey = "windoge:hoyolab:event"
     let cacheData = await redis.get(redisKey)
@@ -28,6 +38,7 @@ async function getEvent(moreEvent=false) {
         headers: reqHeaders,
         timeout: 10000,
         method: 'get',
+        agent: await getProxy(),
     }
     let eventList = []
 
