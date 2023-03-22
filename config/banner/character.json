@@ -1,4 +1,61 @@
 [{
+    "version": "3.5.2",
+    "items": [
+        {
+            "itemId": 35,
+            "weaponType": "Polearm",
+            "imageUrl": "/game_record/genshin/character_icon/UI_AvatarIcon_Shenhe.png",
+            "rankType": 5,
+            "itemType": "Character",
+            "name": "申鹤",
+            "nameEn": "Shenhe",
+            "element": "Cryo"
+        },
+        {
+            "itemId": 26,
+            "weaponType": "Sword",
+            "imageUrl": "/game_record/genshin/character_icon/UI_AvatarIcon_Ayaka.png",
+            "rankType": 5,
+            "itemType": "Character",
+            "name": "神里绫华",
+            "nameEn": "Kamisato Ayaka",
+            "element": "Cryo"
+        },
+        {
+            "itemId": 7,
+            "weaponType": "Catalyst",
+            "imageUrl": "/game_record/genshin/character_icon/UI_AvatarIcon_Sucrose.png",
+            "rankType": 4,
+            "itemType": "Character",
+            "name": "砂糖",
+            "nameEn": "Sucrose",
+            "element": "Anemo"
+        },
+        {
+            "itemId": 9,
+            "weaponType": "Bow",
+            "imageUrl": "/game_record/genshin/character_icon/UI_AvatarIcon_Diona.png",
+            "rankType": 4,
+            "itemType": "Character",
+            "name": "迪奥娜",
+            "nameEn": "Diona",
+            "element": "Cryo"
+        },
+        {
+            "itemId": 80,
+            "weaponType": "Polearm",
+            "imageUrl": "/game_record/genshin/character_icon/UI_AvatarIcon_Mika.png",
+            "rankType": 4,
+            "itemType": "Character",
+            "name": "米卡",
+            "nameEn": "Mika",
+            "element": "Cryo"
+        }
+    ],
+    "start": "2023-03-21 18:00:00",
+    "end": "2023-04-11 14:59:59"
+},
+{
     "version": "3.5.1",
     "items": [
         {
