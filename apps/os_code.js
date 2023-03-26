@@ -1,6 +1,5 @@
 import fs from "fs";
 import fetch from "node-fetch";
-import { segment } from "oicq";
 import {
     Cfg,
     Data

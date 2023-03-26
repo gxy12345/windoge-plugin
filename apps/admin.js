@@ -1,6 +1,3 @@
-import {
-	segment
-} from "oicq";
 import fs from "fs";
 import lodash from "lodash";
 import Data from "../components/Data.js"

@@ -1,6 +1,3 @@
-import {
-	segment
-} from "oicq";
 import utils from "./utils.js";
 import moment from 'moment';
 
