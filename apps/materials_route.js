@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import fetch from "node-fetch";
 import common from '../../../lib/common/common.js'
-import { segment } from "oicq";
 import utils from "./utils.js";
 import { Cfg } from "../components/index.js";
 import { isV3 } from "../components/Changelog.js";

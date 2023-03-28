@@ -1,4 +1,3 @@
-import { segment } from "oicq";
 import fs from "fs";
 
 //项目路径

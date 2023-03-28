@@ -1,4 +1,3 @@
-import { segment } from "oicq";
 import fs from "fs";
 import { isV3 } from "../components/Changelog.js";
 
