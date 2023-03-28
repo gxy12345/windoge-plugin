@@ -37,6 +37,9 @@
       
       <li>卡池开始时间<strong>{{item_banner_data.pool.start}}</strong></li>
       <li>卡池结束时间<strong>{{item_banner_data.pool.end}}</strong></li>
+      {{if item_banner_data.item_index > 0 }}
+      <li>距今天数<strong> {{item_banner_data.pool.days}} 天</strong></li>
+      {{/if}}
     </ul>
     <!-- <div class="data-info">
       <span>当前时间：</span>

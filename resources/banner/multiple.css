@@ -158,11 +158,11 @@ body {
 }
 .cont .tr .td-name {
   text-align: left;
-  width: 100px;
+  width: 80px;
   padding-left: 10px;
 }
 .cont .tr .td-name .item-name {
-  width: 100px;
+  width: 80px;
 }
 .cont .tr .td-name .char-icon {
   width: 30px;
@@ -181,15 +181,15 @@ body {
   border-radius: 0 0 6px 12px;
 }
 .cont .tr .td-total-up {
-  width: 50px;
+  width: 40px;
   text-align: center;
 }
 .cont .tr .td-lastpool {
-  width: 100px;
+  width: 80px;
   text-align: center;
 }
 .cont .tr .td-poolcount {
-  width: 120px;
+  width: 140px;
   text-align: center;
 }
 .cont .tr .td-fetter {

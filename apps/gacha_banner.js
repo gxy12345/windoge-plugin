@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import YAML from 'yaml'
+import moment from 'moment'
 import Common from "../components/Common.js";
 import { Cfg } from "../components/index.js";
 import { isV3 } from "../components/Changelog.js";
@@ -167,6 +168,7 @@ async function getSingleItemBanner(name, is_character = true) {
     }
     let pickUpGacha = banner_data[item_index];
     let item_info = pickUpGacha.items.find(item => item.name == name)
+    let days = Math.floor(moment.duration(moment().diff(moment(pickUpGacha.end))).asDays())
     item_info.imageUrl = `https://upload-bbs.mihoyo.com/${item_info.imageUrl}`
     return {
         name: name,
@@ -177,6 +179,7 @@ async function getSingleItemBanner(name, is_character = true) {
             index: pickUpGacha.version.substr(pickUpGacha.version.length - 1, 1) === "1" ? "上半" : "下半",
             start: pickUpGacha.start,
             end: pickUpGacha.end,
+            days: days,
         },
         item_info: item_info
     }

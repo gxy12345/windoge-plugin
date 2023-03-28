@@ -27,7 +27,7 @@
       <div class="avatar tr thead">
         <div class="td-idx">#</div>
         <div class="td-name">角色</div>
-        <div class="td-total-up">累计UP次数</div>
+        <div class="td-total-up">UP次数</div>
         <div class="td-lastpool">上次UP卡池</div>
         <div class="td-poolcount">距今间隔</div>
       </div>
@@ -47,7 +47,7 @@
         <div class="td-total-up">{{item.total_up_amount}}</div>
         <div class="td-lastpool">{{item.pool.version}} {{item.pool.index}}</div>
         {{if item.item_index > 0 }}
-        <div class="td-poolcount">{{item.item_index}}个卡池</div>
+        <div class="td-poolcount">{{item.item_index}}个卡池 / {{item.pool.days}}天</div>
         {{else}}
         <div class="td-poolcount">本期UP</div>
         {{/if}}
