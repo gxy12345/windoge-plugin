@@ -19,7 +19,7 @@ const weapon_banner_data_url = [
     "https://raw.githubusercontent.com/KeyPJ/genshin-gacha-banners/master/public/data/weapon.json",
     "https://genshin-gacha-banners.52v6.com/data/weapon.json",
 ]
-const weapon_nickname_data_url = "https://raw.fastgit.org/Nwflower/Atlas/master/resource/othername/weapon.yaml"
+const weapon_nickname_data_url = "https://raw.githubusercontent.com/Nwflower/Atlas/master/resource/Forlibrary/Genshin-Atlas/othername/weapon.yaml"
 
 const character_data_api = "https://info.minigg.cn/characters?query="
 const weapon_data_api = "https://info.minigg.cn/weapons?query="
