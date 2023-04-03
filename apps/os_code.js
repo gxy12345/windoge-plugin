@@ -69,6 +69,7 @@ export async function OSCode(e) {
             msgData.push(val)
         })
         msgData.push("兑换码兑换网站: https://genshin.hoyoverse.com/zh-tw/gift")
+        msgData.push("可使用命令 #兑换码使用+(空格)+兑换码 进行兑换。若兑换失败，请尝试刷新cookie或重新绑定cookie")
         await utils.replyMake(e, msgData, 0)
         return true
     } else {

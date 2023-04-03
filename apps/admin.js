@@ -17,6 +17,7 @@ const require = createRequire(
 	import.meta.url);
 
 const _path = process.cwd();
+const redisKeyRoot = 'windoge:*'
 const resPath = `${_path}/plugins/windoge-plugin/resources/`;
 
 const templatePath = {
@@ -417,4 +418,16 @@ export async function updateMiaoPlugin(e) {
 
 	});
 	return true;
+}
+
+export async function clearRedisCache(e) {
+	if (!await checkAuth(e)) {
+		return true;
+	}
+	let keys = await redis.keys(`${redisKeyRoot}*`)
+    for (let key of keys) {
+		Bot.logger.debug(`开始删除key:${key}`);
+		await redis.del(key)
+    }
+	e.reply("清理缓存成功~");
 }
