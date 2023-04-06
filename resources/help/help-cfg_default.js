@@ -51,8 +51,8 @@ export const helpList = [{
 	},
 	{
 		"icon": 5,
-		"title": "#原石预估",
-		"desc": "下版本可获得原石预估"
+		"title": "#原石预估 #3.5原石预估",
+		"desc": "下版本/指定版本可获得原石预估"
 	},
 	{
 		"icon": 8,
@@ -115,6 +115,10 @@ export const helpList = [{
 		"icon": 94,
 		"title": "#群通知 #群通知帮助",
 		"desc": "群发通知消息"
+	}, {
+		"icon": 92,
+		"title": "#windoge清理缓存",
+		"desc": "清空本插件的redis缓存"
 	}
 	]
 }]

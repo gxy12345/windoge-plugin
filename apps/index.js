@@ -15,7 +15,8 @@ import {
 	updateMiaoPlugin,
 	updateNoteRes,
 	setNoteRes,
-	clearNoteRes
+	clearNoteRes,
+	clearRedisCache,
 } from "./admin.js";
 import {
 	rule as broadcastRule,
@@ -29,7 +30,6 @@ import {
 } from "./refer_Artifacts.js";
 import {
 	material_chart,
-	primogems_expect,
 } from "./materials.js";
 import {
 	checkEvent
@@ -47,6 +47,7 @@ import {
 	getMultipleBanner
 } from "./gacha_banner.js";
 import { MaterialRoute, CharMaterialRoute } from "./materials_route.js";
+import { primogems_expect } from "./primogems_expect.js";
 
 export {
 	updateMiaoPlugin,
@@ -76,6 +77,7 @@ export {
 	getMultipleBanner,
 	MaterialRoute,
 	CharMaterialRoute,
+	clearRedisCache,
 };
 const _path = process.cwd();
 
@@ -105,7 +107,7 @@ let rule = {
 		describe: "素材表",
 	},
 	primogems_expect: {
-		reg: "^#*原石(预估|预期)+$",
+		reg: "^#*([1-9]\.[0-9])?原石(预估|预期)+$",
 		describe: "原石预估"
 	},
 	versionInfo: {
@@ -117,10 +119,6 @@ let rule = {
 		priority: 100,
 		describe: "参考面板说明",
 	},
-	// pool_interval: {
-	// 	reg: "^#*未复刻(角色|武器)*$",
-	// 	describe: "角色未复刻间隔"
-	// },
 	checkEvent: {
 		reg: "^#*国际服(白嫖|羊毛|活动)$",
 		describe: "国际服hoyolab白嫖原石活动"
@@ -160,6 +158,10 @@ let rule = {
 	CharMaterialRoute: {
 		reg: /^#?(.+)(培养|突破|养成)(素材|材料)?收集$/,
 		describe: "查询角色素材收集攻略",
+	},
+	clearRedisCache: {
+		reg: /^#?windoge(清理|清空|删除)缓存$/,
+		describe: "清空Redis缓存",
 	},
 
 	...adminRule,

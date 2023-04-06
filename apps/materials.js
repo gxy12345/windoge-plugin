@@ -110,20 +110,20 @@ export async function material_chart(e) {
     return true;//返回true 阻挡消息不再往下
 }
 
-export async function primogems_expect(e) {
-    let path = `${_path}/plugins/windoge-plugin/resources/materials/原石预估.png`;
-    console.log(path);
-    if (fs.existsSync(path)) {
-        //最后回复消息
-        let msg = [
-            segment.image(path),
-        ];
-        //发送消息
-        e.reply(msg);
-    } else {
-        e.reply("查询失败~>_<");
-    }
-    return true;//返回true 阻挡消息不再往下
-}
+// export async function primogems_expect(e) {
+//     let path = `${_path}/plugins/windoge-plugin/resources/materials/原石预估.png`;
+//     console.log(path);
+//     if (fs.existsSync(path)) {
+//         //最后回复消息
+//         let msg = [
+//             segment.image(path),
+//         ];
+//         //发送消息
+//         e.reply(msg);
+//     } else {
+//         e.reply("查询失败~>_<");
+//     }
+//     return true;//返回true 阻挡消息不再往下
+// }
 
 
