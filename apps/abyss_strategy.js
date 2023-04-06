@@ -16,13 +16,12 @@ const collection_id = [
     980743,
     // 茗血茶
     1519172,
-    // 大数据库里
-    1380672,
-
+    // 素贞丰
+    1912768,
 ]
-const source = ['原神观测枢', '李沐瑟', '茗血茶', '大数据库里']
+const source = ['原神观测枢', '李沐瑟', '茗血茶', '素贞丰']
 
-const oss = '?x-oss-process=image//resize,s_1200/quality,q_90/auto-orient,0/interlace,1/format,jpg'
+const oss = '?x-oss-process=image//resize,s_1200/quality,q_90/auto-orient,0/interlace,1/format,png'
 
 async function getData(url) {
     let response = await fetch(url, { method: 'get' })
@@ -112,7 +111,7 @@ async function getStrategyImg(e, versionName, source_group, versionPath) {
     Bot.logger.mark(`下载${versionName}攻略图`)
     let img_idx = 1
     for (let url of imgs) {
-        if (!await common.downFile(url + oss, `${versionPath}/${img_idx}.jpg`)) {
+        if (!await common.downFile(url + oss, `${versionPath}/${img_idx}.png`)) {
             return false
         }
         img_idx = img_idx + 1
