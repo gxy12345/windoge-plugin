@@ -12,7 +12,7 @@ const _path = process.cwd();
 const collection_url = "https://bbs-api.mihoyo.com/post/wapi/getPostFullInCollection?&gids=2&order_type=2&collection_id="
 const collection_ids = {
     'material': [1845635, 1902839],
-    'character': [701708]
+    'character': [701708, 17465]
 }
 
 let Botcfg;
