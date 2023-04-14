@@ -50,7 +50,14 @@ export async function MaterialRoute(e) {
     let mysNews = await import(`file://${_path}/plugins/genshin/model/mysNews.js`)
     let mys_news = new mysNews.default(e)
     const param = await mys_news.newsDetail(post_id)
-    const img = await mys_news.rander(param)
+    let img
+    if (mys_news.rander) {
+        img = await mys_news.rander(param)
+    } else {
+        //兼容TRSS
+        img = await mys_news.render(param)
+    }
+    
 
     let reply_msg = await mys_news.replyMsg(img, `原神${material_name} 素材收集路线`)
     e.reply(reply_msg)
@@ -72,7 +79,13 @@ export async function CharMaterialRoute(e) {
     let mysNews = await import(`file://${_path}/plugins/genshin/model/mysNews.js`)
     let mys_news = new mysNews.default(e)
     const param = await mys_news.newsDetail(post_id)
-    const img = await mys_news.rander(param)
+    let img
+    if (mys_news.rander) {
+        img = await mys_news.rander(param)
+    } else {
+        //兼容TRSS
+        img = await mys_news.render(param)
+    }
 
     let reply_msg = await mys_news.replyMsg(img, `原神${char_name}收集路线`)
     e.reply(reply_msg)
