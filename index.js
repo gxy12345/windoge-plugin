@@ -17,8 +17,13 @@ if (isV3) {
 	index = await Data.importModule('/plugins/windoge-plugin/adapter', 'index.js')
 }
 export const windoge = index.windoge || {}
-Bot.logger.info(`---------^_^---------`)
-Bot.logger.info(`windoge-plugin${currentVersion}初始化~`)
+if (Bot?.logger?.info) {
+	Bot.logger.info(`---------^_^---------`)
+	Bot.logger.info(`windoge-plugin${currentVersion}初始化~`)
+  } else {
+	console.log(`windoge-plugin${currentVersion}初始化~`)
+  }
+  
 
 setTimeout(async function() {
 	let msgStr = await redis.get('windoge:restart-msg')

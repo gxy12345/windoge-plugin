@@ -41,7 +41,6 @@ export async function MaterialRoute(e) {
     if (/突破|养成|培养/.test(material_name)) {
         return false
     }
-    Bot.logger.debug(material_name)
 
     let post_id = await getMaterialsRoute(e, material_name)
     if (!post_id) {
@@ -65,7 +64,6 @@ export async function CharMaterialRoute(e) {
     }
     let match = /^#?(.+)(培养|突破|养成)(素材|材料)?收集$/.exec(e.msg)
     let char_name = match[1]
-    Bot.logger.debug(char_name)
 
     let post_id = await getMaterialsRoute(e, char_name, 'character')
     if (!post_id) {
@@ -95,7 +93,11 @@ async function getMaterialsRoute(e, keyword, query_type = 'material') {
                 e.reply("查询米游社攻略失败，请检查网络或稍后重试")
                 return false
             } else if (search_res === 0) {
-                Bot.logger.debug(`collection id ${cid} 未找到指定攻略`)
+                if (Bot?.logger?.mark) {
+                    Bot.logger.mark(`collection id ${cid} 未找到指定攻略`)
+                } else {
+                    console.log(`collection id ${cid} 未找到指定攻略`)
+                }
                 continue
             } else {
                 post_id = search_res

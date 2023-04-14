@@ -61,7 +61,11 @@ export async function AbyssStrategy(e) {
 
     let strategyPics = fs.readdirSync(versionPath)
     if (strategyPics.length > 0 && !isUpdate) {
-        Bot.logger.debug(`攻略文件：${strategyPics}`)
+        if (Bot?.logger?.mark) {
+            Bot.logger.mark(`攻略文件：${strategyPics}`)
+        } else {
+            console.log(`攻略文件：${strategyPics}`)
+        }
         let msgs = []
         for (let img_name of strategyPics) {
             msgs.push(segment.image(`file://${versionPath}/${img_name}`))
@@ -108,7 +112,11 @@ async function getStrategyImg(e, versionName, source_group, versionPath) {
         e.reply('暂无该版本攻略数据，请稍后再试')
         return false
     }
-    Bot.logger.mark(`下载${versionName}攻略图`)
+    if (Bot?.logger?.mark) {
+        Bot.logger.mark(`下载${versionName}攻略图`)
+    } else {
+        console.log(`下载${versionName}攻略图`)
+    }
     let img_idx = 1
     for (let url of imgs) {
         if (!await common.downFile(url + oss, `${versionPath}/${img_idx}.png`)) {
@@ -116,6 +124,10 @@ async function getStrategyImg(e, versionName, source_group, versionPath) {
         }
         img_idx = img_idx + 1
     }
-    Bot.logger.mark(`下载${versionName}攻略成功`)
+    if (Bot?.logger?.mark) {
+        Bot.logger.mark(`下载${versionName}攻略成功`)
+    } else {
+        console.log(`下载${versionName}攻略成功`)
+    }
     return true
 }

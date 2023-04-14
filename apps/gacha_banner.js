@@ -127,7 +127,11 @@ async function keywordToWeaponFullName(keyword) {
         return Object.keys(weapon_name_data).find(k => inNickname(weapon_name_data[k], value))
     }
     let full_name = find_key(keyword)
-    Bot.logger.debug(`匹配结果: ${full_name}`)
+    if (Bot?.logger?.mark) {
+        Bot.logger.mark(`武器匹配结果: ${full_name}`)
+    } else {
+        console.log(`武器匹配结果: ${full_name}`)
+    }
     if (full_name === undefined) return keyword
     return full_name
 }
@@ -149,7 +153,6 @@ async function getItemList(is_character = true, level = 5) {
             }
         }
     }
-    Bot.logger.debug(JSON.stringify(unique_list))
     return unique_list
 }
 

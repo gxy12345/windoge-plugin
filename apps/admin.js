@@ -205,7 +205,7 @@ export async function updateNoteRes(e) {
 	let command = "";
 	let resBJTStatus = fs.existsSync(`${resPath}/BJT/`);
 	let resBJT2Status = fs.existsSync(`${resPath}/BJT-Template/`);
-	Bot.logger.mark(`资源状态: 背景库1:${resBJTStatus}, 背景库2:${resBJT2Status}`);
+	// Bot.logger.mark(`资源状态: 背景库1:${resBJTStatus}, 背景库2:${resBJT2Status}`);
 
 	if (resBJTStatus && resBJT2Status) {
 		command = `git pull`;
@@ -266,7 +266,6 @@ export async function updateNoteRes(e) {
 				if (error) {
 					e.reply("【背景图库1】安装失败！\nError code: " + error.code + "\n" + error.stack + "\n 请稍后重试。");
 				} else {
-					Bot.logger.mark("背景图库1 安装完成");
 					BJTDownloadStatus1 = true;
 					e.reply(`背景图资源1安装成功！可以使用 #导入便签背景图(1234) 来导入背景图\n您后续也可以通过 #便签背景图更新 命令来更新图像`);
 				}
@@ -279,7 +278,6 @@ export async function updateNoteRes(e) {
 				if (error) {
 					e.reply("【背景图库2】安装失败！\nError code: " + error.code + "\n" + error.stack + "\n 请稍后重试。");
 				} else {
-					Bot.logger.mark("背景图库2 安装完成");
 					BJTDownloadStatus2 = true;
 					e.reply(`背景图资源2安装成功！可以使用 #导入便签背景图(567) 来导入背景图\n您后续也可以通过 #便签背景图更新 命令来更新图像`);
 				}
@@ -317,8 +315,8 @@ export async function setNoteRes(e) {
 	let templateSource = templatePath[templateKey].resPath;
 	let templateDest = templatePath[templateKey].dstPath;
 
-	Bot.logger.mark(`选择背景图路径: ${templateSource}`);
-	Bot.logger.mark(`替换背景图路径: ${templateDest}`);
+	// Bot.logger.mark(`选择背景图路径: ${templateSource}`);
+	// Bot.logger.mark(`替换背景图路径: ${templateDest}`);
 
 	copyFolder(templateSource, templateDest, true)
 	e.reply("导入背景图完成");
@@ -339,7 +337,7 @@ export async function clearNoteRes(e) {
 	exec(command, {
 		cwd: `${_path}/plugins/windoge-plugin/`
 	}, function (error, stdout, stderr) {
-		Bot.logger.mark(`最新commit-id: ${stdout.replace("\n", "")}`);
+		// Bot.logger.mark(`最新commit-id: ${stdout.replace("\n", "")}`);
 
 		currentCommitId = stdout.replace("\n", "")
 		if (error) {
@@ -409,8 +407,14 @@ export async function updateMiaoPlugin(e) {
 					Bot.logger.error('重启失败\n${error.stack}');
 					return true;
 				} else if (stdout) {
-					Bot.logger.mark("重启成功，运行已转为后台，查看日志请用命令：npm run log");
-					Bot.logger.mark("停止后台运行命令：npm stop");
+					if (Bot?.logger?.mark) {
+						Bot.logger.mark("重启成功，运行已转为后台，查看日志请用命令：npm run log");
+						Bot.logger.mark("停止后台运行命令：npm stop");
+					} else {
+						console.log("重启成功，运行已转为后台，查看日志请用命令：npm run log")
+						console.log("停止后台运行命令：npm stop")
+					}
+
 					process.exit();
 				}
 			})
@@ -426,8 +430,11 @@ export async function clearRedisCache(e) {
 	}
 	let keys = await redis.keys(`${redisKeyRoot}*`)
     for (let key of keys) {
-		Bot.logger.debug(`开始删除key:${key}`);
-		await redis.del(key)
+		if (Bot?.logger?.mark) {
+			Bot.logger.mark(`开始删除key:${key}`);
+		} else {
+			console.log(`开始删除key:${key}`)
+		}
     }
 	e.reply("清理缓存成功~");
 }

@@ -15,7 +15,6 @@ export async function primogems_expect(e) {
         res_files = res_files.filter((file)=> {
             return file.endsWith('.png')
         })
-        Bot.logger.debug(`资源列表:${res_files}`);
         res_files.sort()
         res_files.reverse()
         fileName = res_files[0]

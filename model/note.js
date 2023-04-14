@@ -37,7 +37,11 @@ export default class note {
 			return true;
 		}
 		if (this.e.isTask) {
-			Bot.logger.mark(`体力推送:${this.e.user_id}`);
+			if (Bot?.logger?.mark) {
+				Bot.logger.mark(`体力推送:${this.e.user_id}`);
+			} else {
+				console.log(`体力推送:${this.e.user_id}`)
+			}
 		}
 		let nowDay = moment(new Date()).format("DD");
 		let resinMaxTime;

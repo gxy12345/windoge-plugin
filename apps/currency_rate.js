@@ -48,9 +48,12 @@ async function getRate() {
         return currency_list
     }
     const res = await response.json()
-    Bot.logger.debug(JSON.stringify(res))
     if (!res || !res.conversion_rates) {
-        Bot.logger.mark('汇率接口没有返回数据')
+        if (Bot?.logger?.mark) {
+            Bot.logger.mark('汇率接口没有返回数据')
+        } else {
+            console.log(`汇率接口没有返回数据`)
+        }
         return currency_list
     }
     currency_list = res.conversion_rates
@@ -70,7 +73,6 @@ export async function CurrencyRate(e, {render}) {
         return true
     }
     let price_list = []
-    Bot.logger.debug(JSON.stringify(currency_list))
 
     let json_data_path
     let platform
@@ -92,10 +94,8 @@ export async function CurrencyRate(e, {render}) {
             console.error(err)
             return false
         })
-    Bot.logger.debug(JSON.stringify(currency_price_list))
 
     for (let currency_key in currency_price_list) {
-        Bot.logger.debug(`货币:${currency_key}, 价格:${currency_price_list[currency_key]}, 折合RMB价格:${currency_price_list[currency_key] / currency_list[currency_key]}`)
         let price_item = {
             currency: currency_key,
             currency_name: currency_price_list[currency_key].name,
