@@ -25,12 +25,10 @@ async function getCode() {
     res = res.replace(/<!--(.|[\r\n])*?-->/g, "")
     // 提取激活码所在元素
     let rawCodes = res.match(/<div class="w-clipboard-copy-ui">\w+<\/div>/g)
-    Bot.logger.debug(`raw codes: ${rawCodes}`)
     let codeList = []
     if (rawCodes) {
         rawCodes.forEach(val => {
             let code = val.replace(/<div class="w-clipboard-copy-ui">|<\/div>/g, "")
-            Bot.logger.debug(`get code: ${code}`)
             codeList.push(code)
         });
     }

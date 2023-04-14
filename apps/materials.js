@@ -74,11 +74,14 @@ async function getMaterialsPic(type) {
         if (!fs.existsSync(material_download_path)) {
             mkdirsSync(material_download_path)
         }
-        Bot.logger.debug(`开始下载${type}素材表`)
+        if (Bot?.logger?.mark) {
+            Bot.logger.mark(`开始下载${type}素材表`)
+        } else {
+            console.log(`开始下载${type}素材表`)
+        }
         if (!await common.downFile(targetImgUrl, `${material_download_path}/${type}素材.png`)) {
             return false
         }
-        Bot.logger.debug(`下载${type}素材表完成`)
         redis.set(materialMap[type].redisKey, targetImgUrl, { EX: 3600 * 24 * 30 });
     }
     return true
@@ -91,7 +94,11 @@ export async function material_chart(e) {
 
     let img_status = await getMaterialsPic(name)
     if (!img_status) {
-        Bot.logger.mark(`无法下载${type}素材表`)
+        if (Bot?.logger?.mark) {
+            Bot.logger.mark(`无法下载${type}素材表`)
+        } else {
+            console.log(`无法下载${type}素材表`)
+        }
     }
 
     let path = `${material_download_path}${name}素材.png`;

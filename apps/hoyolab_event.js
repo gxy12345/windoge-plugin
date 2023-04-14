@@ -54,12 +54,20 @@ async function getEvent(moreEvent=false) {
     }
     const res = await response.json()
     if (!res) {
-        Bot.logger.mark('Hoyolab Event接口没有返回')
+        if (Bot?.logger?.mark) {
+            Bot.logger.mark('Hoyolab Event接口没有返回')
+        } else {
+            console.log(`Hoyolab Event接口没有返回`)
+        }
         return eventList
     }
 
     if (res.retcode !== 0) {
-        Bot.logger.mark(`Hoyolab event接口请求错误, 参数:${JSON.stringify(param)}`)
+        if (Bot?.logger?.mark) {
+            Bot.logger.mark(`Hoyolab event接口请求错误, 参数:${JSON.stringify(param)}`)
+        } else {
+            console.log(`Hoyolab event接口请求错误, 参数:${JSON.stringify(param)}`)
+        }
         return eventList``
     }
 
@@ -68,7 +76,11 @@ async function getEvent(moreEvent=false) {
     res.data.list.forEach(val => {
         // hoyo quiz的结束时间约等于答题活动结束
         if (val.name.includes('HoYo Quiz') && val.name.includes('场次公开') && val.end >= now) {
-            Bot.logger.debug(`获取到满足条件的活动,${val.name}, ${val.desc}`)
+            if (Bot?.logger?.mark) {
+                Bot.logger.mark(`获取到满足条件的活动,${val.name}, ${val.desc}`)
+            } else {
+                console.log(`获取到满足条件的活动,${val.name}, ${val.desc}`)
+            }
             eventList.push(
                 {
                     event_detail: val,
@@ -79,7 +91,11 @@ async function getEvent(moreEvent=false) {
         
         // 直播活动报名结束时间，一般为开始时间后7天
         if (/Twitch创作者成长营|Twitch直播/.test(val.name) && val.end >= now) {
-            Bot.logger.debug(`获取到满足条件的活动,${val.name}, ${val.desc}`)
+            if (Bot?.logger?.mark) {
+                Bot.logger.mark(`获取到满足条件的活动,${val.name}, ${val.desc}`)
+            } else {
+                console.log(`获取到满足条件的活动,${val.name}, ${val.desc}`)
+            }
             let sub_type
             if (now - val.start < 3600 * 24 * 7) {
                 sub_type = 'Twitch直播活动-报名中'
@@ -97,7 +113,11 @@ async function getEvent(moreEvent=false) {
 
         // 网页活动，因为奖励包含抽奖，且不一定准确，开启开关后再显示
         if (moreEvent && /网页活动|H5/.test(val.name) && (/原石|游戏内道具/.test(val.desc) || /原石|游戏内道具/.test(val.name)) && val.end >= now) {
-            Bot.logger.debug(`获取到满足条件的活动,${val.name}, ${val.desc}`)
+            if (Bot?.logger?.mark) {
+                Bot.logger.mark(`获取到满足条件的活动,${val.name}, ${val.desc}`)
+            } else {
+                console.log(`获取到满足条件的活动,${val.name}, ${val.desc}`)
+            }
             eventList.push(
                 {
                     event_detail: val,
@@ -128,7 +148,6 @@ export async function checkEvent(e) {
     }
     let eventList = []
     if (Cfg.get("hoyolab.more_event")) {
-        Bot.logger.debug(`查询更多活动`)
         eventList = await getEvent(true)
     } else {
         eventList = await getEvent(false)

@@ -84,7 +84,11 @@ export async function Note(e, {
 		}
 		if (res.retcode != 0) {
 			if (res.message == "Please login") {
-				Bot.logger.mark(`体力cookie已失效`);
+				if (Bot?.logger?.mark) {
+					Bot.logger.mark(`体力cookie已失效`);
+				} else {
+					console.log(`体力cookie已失效`)
+				}
 				e.reply(`体力cookie已失效，请重新配置\n注意：退出米游社登录cookie将会失效！`);
 				if (NoteCookie[e.user_id]) {
 					// await MysUser.delNote(NoteCookie[e.user_id]);
@@ -93,7 +97,11 @@ export async function Note(e, {
 				}
 			} else {
 				e.reply(`体力查询错误：${res.message}`);
-				Bot.logger.mark(`体力查询错误:${JSON.stringify(res)}`);
+				if (Bot?.logger?.mark) {
+					Bot.logger.mark(`体力查询错误:${JSON.stringify(res)}`);
+				} else {
+					console.log(`体力查询错误:${JSON.stringify(res)}`)
+				}
 			}
 	
 			return true;
