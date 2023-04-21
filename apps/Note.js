@@ -9,6 +9,7 @@ import {
 	Data
 } from "../components/index.js";
 import utils from "./utils.js";
+import common from '../../../lib/common/common.js'
 import note from '../model/note.js'
 const _path = process.cwd();
 
@@ -218,7 +219,7 @@ export async function Note_appoint(e) {
 			endMsg = `已经到底了~~`
 		}
 		msgData.push(endMsg)
-		await utils.replyMake(e, msgData, 0)
+		await common.makeForwardMsg(e, msgData, msgData[0])
 		return true;
 	}
 	if (keyType.includes(msg + ".png")) {
