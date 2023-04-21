@@ -187,7 +187,8 @@ export async function checkEvent(e) {
         }
     }
     if (needMakeMsg) {
-        await common.makeForwardMsg(e, msgData, msgData[0])
+        let fwdMsgs = await common.makeForwardMsg(e, msgData, msgData[0])
+        e.reply(fwdMsgs)
     } else {
         e.reply(msg)
     }
