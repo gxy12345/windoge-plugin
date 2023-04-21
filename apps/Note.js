@@ -219,7 +219,8 @@ export async function Note_appoint(e) {
 			endMsg = `已经到底了~~`
 		}
 		msgData.push(endMsg)
-		await common.makeForwardMsg(e, msgData, msgData[0])
+		let fwdMsg = await common.makeForwardMsg(e, msgData, msgData[0])
+		e.reply(fwdMsg)
 		return true;
 	}
 	if (keyType.includes(msg + ".png")) {

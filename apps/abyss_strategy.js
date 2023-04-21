@@ -72,7 +72,8 @@ export async function AbyssStrategy(e) {
         }
 
         if (Cfg.get("abyss_strategy.forward", false)) {
-            await common.makeForwardMsg(e, msgs, msgs[0])
+            let fwdMsgs = await common.makeForwardMsg(e, msgs, msgs[0])
+            e.reply(fwdMsgs)
         } else {
             e.reply(msgs)
         }
@@ -85,7 +86,8 @@ export async function AbyssStrategy(e) {
             msgs.push(segment.image(`file://${versionPath}/${img_name}`))
         }
         if (Cfg.get("abyss_strategy.forward", false)) {
-            await common.makeForwardMsg(e, msgs, msgs[0])
+            let fwdMsgs = await common.makeForwardMsg(e, msgs, msgs[0])
+            e.reply(fwdMsgs)
         } else {
             e.reply(msgs)
         }
