@@ -32,21 +32,7 @@ async function getData(url) {
     return res
 }
 
-function mkdirsSync(dirname) {
-    if (fs.existsSync(dirname)) {
-        return true;
-    } else {
-        if (mkdirsSync(path.dirname(dirname))) {
-            fs.mkdirSync(dirname);
-            return true;
-        }
-    }
-}
-
 export async function AbyssStrategy(e) {
-    // if (!fs.existsSync(abyss_strategy_path)) {
-    //     fs.mkdirSync(abyss_strategy_path)
-    // }
     let match = /^#?(更新)?(\d\.\d)深渊攻略([1-4])?$/.exec(e.msg)
     let isUpdate = !!match[1]
     let versionName = match[2]
@@ -54,82 +40,38 @@ export async function AbyssStrategy(e) {
     let group = match[3] ? match[3] : default_group
     let source_dir = source[group - 1]
 
-    let versionPath = `${abyss_strategy_path}/${versionName}/${source_dir}`
-    if (!fs.existsSync(versionPath)) {
-        mkdirsSync(versionPath)
-    }
-
-    let strategyPics = fs.readdirSync(versionPath)
-    if (strategyPics.length > 0 && !isUpdate) {
-        if (Bot?.logger?.mark) {
-            Bot.logger.mark(`攻略文件：${strategyPics}`)
-        } else {
-            console.log(`攻略文件：${strategyPics}`)
-        }
-        let msgs = []
-        for (let img_name of strategyPics) {
-            msgs.push(segment.image(`file://${versionPath}/${img_name}`))
-        }
-
-        if (Cfg.get("abyss_strategy.forward", false)) {
-            let fwdMsgs = await common.makeForwardMsg(e, msgs, msgs[0])
-            e.reply(fwdMsgs)
-        } else {
-            e.reply(msgs)
-        }
+    let post_id = await searchCollection(collection_id[group - 1], versionName)
+    if (post_id == -1) {
+        e.reply("查询米游社攻略失败，请检查网络或稍后重试")
+        return true
+    } else if (post_id == 0) {
+        e.reply('暂无该版本攻略数据，请稍后再试')
         return true
     }
-    if (await getStrategyImg(e, versionName, group, versionPath)) {
-        strategyPics = fs.readdirSync(versionPath)
-        let msgs = []
-        for (let img_name of strategyPics) {
-            msgs.push(segment.image(`file://${versionPath}/${img_name}`))
-        }
-        if (Cfg.get("abyss_strategy.forward", false)) {
-            let fwdMsgs = await common.makeForwardMsg(e, msgs, msgs[0])
-            e.reply(fwdMsgs)
-        } else {
-            e.reply(msgs)
-        }
-        return true
-    }
-}
 
-async function getStrategyImg(e, versionName, source_group, versionPath) {
-    let strategyUrl = `${collection_url}${collection_id[source_group - 1]}`
-    let res = await getData(strategyUrl)
-    if (!res) {
-        e.reply('暂无该版本攻略数据，请稍后再试')
-    }
-    let imgs = []
-    for (let val of res.data.posts) {
-        if (val.post.subject.includes(versionName)) {
-            val.image_list.forEach((v, i) => {
-                if (Number(v.size) >= 600000 && v.format != 'gif') imgs.push(v.url)
-            })
-            break
-        }
-    }
-    if (imgs.length == 0) {
-        e.reply('暂无该版本攻略数据，请稍后再试')
-        return false
-    }
-    if (Bot?.logger?.mark) {
-        Bot.logger.mark(`下载${versionName}攻略图`)
+    let mysNews = await import(`file://${_path}/plugins/genshin/model/mysNews.js`)
+    let mys_news = new mysNews.default(e)
+    const param = await mys_news.newsDetail(post_id)
+    let img
+    if (mys_news.rander) {
+        img = await mys_news.rander(param)
     } else {
-        console.log(`下载${versionName}攻略图`)
-    }
-    let img_idx = 1
-    for (let url of imgs) {
-        if (!await common.downFile(url + oss, `${versionPath}/${img_idx}.png`)) {
-            return false
-        }
-        img_idx = img_idx + 1
-    }
-    if (Bot?.logger?.mark) {
-        Bot.logger.mark(`下载${versionName}攻略成功`)
-    } else {
-        console.log(`下载${versionName}攻略成功`)
+        //兼容TRSS
+        img = await mys_news.render(param)
     }
     return true
+}
+
+async function searchCollection(cid, keyword) {
+    let strategyUrl = `${collection_url}${cid}`
+    let res = await getData(strategyUrl)
+    if (!res) {
+        return -1
+    }
+    for (let val of res.data.posts) {
+        if (val.post.subject.includes(keyword)) {
+            return val.post.post_id
+        }
+    }
+    return 0
 }

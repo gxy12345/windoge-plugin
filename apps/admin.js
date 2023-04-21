@@ -65,7 +65,6 @@ let cfgMap = {
 	"更多活动": "hoyolab.more_event",
 	"兑换码": "os.code",
 	"汇率key": "os.currency_key",
-	"深渊攻略转发": "abyss_strategy.forward",
 	"深渊攻略来源": "abyss_strategy.default",
 	"显示常驻": "banner.show_permanent",
 	"卡池数据源": "banner.data_source"
@@ -149,7 +148,6 @@ export async function sysCfg(e, {
 		CurrencyAPIKey: getStatus("os.currency_key", false),
 		bannerShowPermanent: getStatus("banner.show_permanent", false),
 		bannerDataSource: Cfg.get("banner.data_source", 0),
-		AbyssForward: getStatus("abyss_strategy.forward", false),
 		AbyssDefault: Cfg.get("abyss_strategy.default", 1),
 		bg: await rodom(), //获取底图
 	}
