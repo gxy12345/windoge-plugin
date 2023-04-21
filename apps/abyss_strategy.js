@@ -59,6 +59,8 @@ export async function AbyssStrategy(e) {
         //兼容TRSS
         img = await mys_news.render(param)
     }
+    let reply_msg = await mys_news.replyMsg(img, `原神${versionName}深渊攻略`)
+    e.reply(reply_msg)
     return true
 }
 
