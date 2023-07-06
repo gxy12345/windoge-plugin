@@ -28,8 +28,9 @@ const charRedisKey = "windoge:banner:char"
 const weaponRedisKey = "windoge:banner:weapon"
 const weaponNicknameRedisKey = "windoge:nickname:weapon"
 
+// 常驻角色&武器，用于过滤
 const nameBlacklist = [
-    "刻晴", "提纳里",
+    "刻晴", "提纳里", "迪希雅",
     "狼的末路", "风鹰剑", "阿莫斯之弓", "四风原典", "和璞鸢",
     "天空之翼", "天空之刃", "天空之傲", "天空之卷", "天空之脊"
 ]
