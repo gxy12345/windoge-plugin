@@ -4,6 +4,7 @@
 
 ### 安装方法
 1. yunzai根目录运行以下命令
+
 github:
 ```
 git clone https://github.com/gxy12345/windoge-plugin.git ./plugins/windoge-plugin/
