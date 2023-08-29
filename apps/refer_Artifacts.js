@@ -31,8 +31,8 @@ export async function refer_Artifacts (e) {
     }
     let name;
     if (["10000005", "10000007", "20000000"].includes(id)) {
-        if (!["风主", "岩主", "雷主", "草主"].includes(msg)) {
-            e.reply("请输入风主/岩主/雷主/草主参考面板~");
+        if (!["风主", "岩主", "雷主", "草主", "水主"].includes(msg)) {
+            e.reply("请输入风主/岩主/雷主/草主/水主参考面板~");
             return true;
         }
         name = msg;
