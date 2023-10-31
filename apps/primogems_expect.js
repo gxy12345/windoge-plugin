@@ -8,8 +8,11 @@ const resourceDir = `${_path}/plugins/windoge-plugin/resources/primogems_expect`
 
 export async function primogems_expect(e) {
     let match = /^#?([1-9]\.[0-9])?原石(预估|预期)$/.exec(e.msg)
-    let versionName = match[1]
+    let versionName
     let fileName
+    if (match) {
+        versionName = match[1]
+    }
     if (!versionName) {
         let res_files = fs.readdirSync(resourceDir)
         res_files = res_files.filter((file)=> {
