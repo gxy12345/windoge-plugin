@@ -433,6 +433,7 @@ export async function clearRedisCache(e) {
 		} else {
 			console.log(`开始删除key:${key}`)
 		}
+		await redis.del(key)
     }
 	e.reply("清理缓存成功~");
 }
