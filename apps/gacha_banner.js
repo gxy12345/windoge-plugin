@@ -12,12 +12,14 @@ const character_banner_data_url = [
     "https://raw.fastgit.org/KeyPJ/FetchData/main/data/gacha/gi/character.json",
     "https://raw.githubusercontent.com/KeyPJ/FetchData/main/data/gacha/gi/character.json",
     "https://ghproxy.com/https://raw.githubusercontent.com/KeyPJ/FetchData/main/data/gacha/gi/character.json",
+    "https://raw.githubusercontent.com/gxy12345/genshin-gacha-banners-mirror/main/character.json",
 ]
 const weapon_banner_data_url = [
     "https://genshin-gacha-banners.52v6.com/data/gi/weapon.json",
     "https://raw.fastgit.org/KeyPJ/FetchData/main/data/gacha/gi/weapon.json",
     "https://raw.githubusercontent.com/KeyPJ/FetchData/main/data/gacha/gi/weapon.json",
     "https://ghproxy.com/https://raw.githubusercontent.com/KeyPJ/FetchData/main/data/gacha/gi/weapon.json",
+    "https://raw.githubusercontent.com/gxy12345/genshin-gacha-banners-mirror/main/weapon.json",
 ]
 const weapon_nickname_data_url = "https://raw.githubusercontent.com/Nwflower/Atlas/master/resource/Forlibrary/Genshin-Atlas/othername/weapon.yaml"
 
