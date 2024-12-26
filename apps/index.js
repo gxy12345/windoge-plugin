@@ -129,7 +129,7 @@ let rule = {
 		priority: 100,
 	},
 	gacha_expect: {
-		reg: "^#(抽卡|[0-6]命)+期望+$",
+		reg: "^#(抽卡|[0-6]命|精[(0|1|5)])+期望+$",
 		describe: "抽卡期望表"
 	},
 	CurrencyRate: {
