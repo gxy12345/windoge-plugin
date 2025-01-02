@@ -19,7 +19,7 @@ export async function gacha_expect(e) {
         target_file_name = `r${e.msg.match(/\d/g)[0]}.png`
 
     } else {
-        target_file_name = 'all.png'
+        target_file_name = 'all.jpg'
     }
 
     let path = `${_path}/plugins/windoge-plugin/resources/gachaExpect/${target_file_name}`;
